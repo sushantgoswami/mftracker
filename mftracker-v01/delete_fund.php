@@ -1,0 +1,29 @@
+<?php
+    
+session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: ../login.php");
+    exit;
+}
+
+include 'db_connect.php';
+
+if (isset($_GET['id'])) {
+
+    $id = (int)$_GET['id'];
+
+    $stmt = $conn->prepare("DELETE FROM `" . $_SESSION['tablename'] . "` WHERE id = ?");
+    $stmt->bind_param("i", $id);
+
+    if ($stmt->execute()) {
+        header("Location: index.php"); // Change to your page name
+        exit;
+    } else {
+        echo "Error deleting record.";
+    }
+
+    $stmt->close();
+}
+
+$conn->close();
+?>

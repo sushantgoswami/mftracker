@@ -1,0 +1,42 @@
+    <style>
+        /* Basic Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse; /* Merges borders into a single line */
+            font-family: Arial, sans-serif;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+
+        /* Make the trigger row look clickable */
+        .header-row {
+            cursor: pointer;
+            background-color: #fafafa;
+            font-weight: bold;
+        }
+        .header-row:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Indicator styling (+ / - icons) */
+        .toggle-icon::before {
+            content: "▶ ";
+            display: inline-block;
+            transition: transform 0.2s;
+        }
+        .header-row.active .toggle-icon::before {
+            transform: rotate(90deg); /* Rotates indicator downwards when open */
+        }
+
+        /* Hide collapsible content by default */
+        .collapsible-row {
+            display: none;
+            background-color: #f9f9f9;
+        }
+    </style>
