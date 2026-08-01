@@ -1,0 +1,58 @@
+php_value display_errors Off
+php_value mbstring.http_input auto
+php_value date.timezone Asia/Calcutta
+# Powered by Site.pro
+<IfModule pagespeed_module>
+	ModPagespeed off
+</IfModule>
+<IfModule mod_expires.c>
+	ExpiresActive On
+	ExpiresDefault A0
+	ExpiresByType image/gif A31536000
+	ExpiresByType image/png A31536000
+	ExpiresByType image/jpeg A31536000
+	ExpiresByType image/svg+xml A31536000
+	ExpiresByType image/webp A31536000
+	ExpiresByType text/css A31536000
+	ExpiresByType text/javascript A31536000
+	ExpiresByType application/javascript A31536000
+	ExpiresByType font/otf A31536000
+	ExpiresByType font/ttf A31536000
+	ExpiresByType font/woff A31536000
+	ExpiresByType font/woff2 A31536000
+</IfModule>
+<IfModule mod_headers.c>
+	<FilesMatch ".(gif|png|jpe?g|svg|webp|css|js|otf|ttf|woff2?)$">
+		Header set Cache-Control "public, max-age=31536000, immutable"
+	</FilesMatch>
+</IfModule>
+<FilesMatch "^(web.config|php_errors.log|error_log)$">
+	<IfModule mod_authz_core.c>
+		Require all denied
+	</IfModule>
+	<IfModule !mod_authz_core.c>
+		Order allow,deny
+	</IfModule>
+</FilesMatch>
+ErrorDocument 401 "Unauthorized"
+ErrorDocument 403 "Forbidden"
+<IfModule mod_negotiation.c>
+	#Options -MultiViews
+</IfModule>
+RewriteEngine On
+RewriteBase /
+RewriteCond %{HTTP:Authorization} ^(.*)
+RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
+RewriteCond %{HTTP:X-Server-Addr} ^(.*)
+RewriteRule .* - [e=HTTP_X_SERVER_ADDR:%1]
+RewriteRule ^.well-known/.+ - [L]
+DirectoryIndex index.php index.cgi index.html
+RewriteCond %{REQUEST_FILENAME} !-f [OR]
+RewriteCond %{REQUEST_URI} ^/(js/(main.js|bootstrap.min.js)|css/([0-9a-f]+.css|common.css|site.css|bootstrap.min.css)|sitemap.xml)$
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ sitepro/$1 [L,QSA]
+#### PERSISTENT CONTENT ####
+<Files "db_connect.php">
+    Order Deny,Allow
+    Deny from all
+</Files>
