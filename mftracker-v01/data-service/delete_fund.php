@@ -6,7 +6,7 @@ if (!isset($_SESSION['username'])) {
     exit;
 }
 
-include 'db_connect.php';
+include '../db_connect.php';
 
 if (isset($_GET['id'])) {
 
@@ -16,10 +16,11 @@ if (isset($_GET['id'])) {
     $stmt->bind_param("i", $id);
 
     if ($stmt->execute()) {
-        header("Location: index.php"); // Change to your page name
+        header("Location: ../index.php"); // Change to your page name
+        $_SESSION['msg'] = "Record deleted.";
         exit;
     } else {
-        echo "Error deleting record.";
+        $_SESSION['msg'] = "Error deleting record.";
     }
 
     $stmt->close();

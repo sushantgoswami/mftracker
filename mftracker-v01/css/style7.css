@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-<?php
-session_start();
-
-if (isset($_SESSION['username'])) { header("Location: index.php"); exit; }
-if (isset($_SESSION['msg'])) { echo "<script> alert('" . addslashes($_SESSION['msg']) . "'); </script>"; unset($_SESSION['msg']); }
-$Captcha = random_int(10000, 99999);
-$_SESSION["Captcha"] = $Captcha;
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fancy Interactive Form</title>
-  <style>
+<style>
     /* Reset & Base Styles */
     * {
       box-sizing: border-box;
@@ -23,15 +7,15 @@ $_SESSION["Captcha"] = $Captcha;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
-    body {
-      # background: linear-gradient(135deg, #0f172a, #1e1b4b);
-      background: linear-gradient(135deg, #1f2a0f, #2bcfc6);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
+    # body {
+    #   # background: linear-gradient(135deg, #0f172a, #1e1b4b);
+    #   background: linear-gradient(135deg, #1f2a0f, #2bcfc6);
+    #   min-height: 100vh;
+    #   display: flex;
+    #   justify-content: center;
+    #   align-items: center;
+    #   padding: 20px;
+    # }
 
     /* Container Card with Glassmorphism */
     .form-container {
@@ -76,7 +60,8 @@ $_SESSION["Captcha"] = $Captcha;
 
     /* Input & Textarea Elements */
     .input-group input,
-    .input-group textarea {
+    .input-group textarea,
+	.input-group select {
       width: 100%;
       padding: 16px;
       background: rgba(255, 255, 255, 0.05);
@@ -170,80 +155,4 @@ $_SESSION["Captcha"] = $Captcha;
     .submit-btn:active {
       transform: translateY(0);
     }
-      
-    /* Container holding both field groups */
-    .form-row {
-      display: flex;       /* Displays children horizontally */
-      gap: 10px;           /* Adds space between the columns */
-      margin-bottom: 10px; /* Adds spacing below the row */
-    }
-
-    /* Individual column wrappers */
-    .form-group {
-      flex: 1;             /* Makes both columns equal width */
-      display: flex;
-      flex-direction: column; /* Stack label above the input */
-    }
-
-    /* Styling the inputs to fit their containers */
-    .form-group input {
-      width: 100%;
-      padding: 8px;
-      box-sizing: border-box; /* Includes padding in width calculation */
-    }
-  </style>
-</head>
-<body>
-
-  <div class="form-container">
-    <h2>mftracker Register</h2>
-    <p>We would love to hear from you. Find the full code in github.</p>
-    
-    <form class="fancy-form" action="register_check.php" method="post">
-      <!-- Name Field -->
-      <div class="input-group">
-        <input type="text" id="username" name="username" placeholder=" " minlength="8" required autocomplete="off">
-        <label for="username">User ID (8 Char)</label>
-      </div>
-
-      <div class="input-group">
-        <input type="text" id="fullname" name="fullname" placeholder=" " required autocomplete="off">
-        <label for="fullname">User Full Name</label>
-      </div>     
-        
-      <div class="input-group">
-        <input type="text" id="email" name="email" placeholder=" " required autocomplete="off">
-        <label for="email">Email ID</label>
-      </div>           
-        
-      <!-- Email Field -->
-      <div class="input-group">
-        <input type="password" id="password" name="password" minlength="8" placeholder=" " required autocomplete="off">
-        <label for="password">Password (8 Char)</label>
-      </div>
-        
-      <!-- Native Accent Checkbox -->
-      <div class="checkbox-group">
-        <input type="checkbox" id="terms" required>
-        <label for="terms">I agree to the privacy policy</label>
-      </div>     
-      
-      <div class="form-row">
-      <div class="input-group"> 
-        <input type="text" id="Captcha" value="<? echo $Captcha;?>" name="Captcha" disabled>
-        <label for="Captcha">Captcha</label>
-      </div>
-      <div class="input-group"> 
-        <input type="text" id="Verify" name="Verify">
-        <label for="Verify">Verify</label>
-      </div></div>
-      
-      <!-- Submit Button -->
-      <button type="submit" class="submit-btn" value="Login">Submit</button>
-       
-      <p>➜ Back to Login Page <a href="index.php">Click Here</a></p>
-    </form>
-  </div>
-
-</body>
-</html>
+</style>

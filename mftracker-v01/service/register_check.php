@@ -1,10 +1,12 @@
 <?php
 session_start();
-include "mftracker-v01/db_connect.php";
+include "../db_connect.php";
 
 $username = $_POST['username'];
 $fullname = $_POST['fullname'];
 $email = $_POST['email'];
+$question1 = $_POST['question1'];
+$answer1 = $_POST['answer1'];
 $captcha_verify = $_POST['Verify'];
 $captcha = $_SESSION['Captcha'];
 $secureNumber = random_int(10000, 99999);
@@ -18,11 +20,11 @@ if ($captcha_verify != $captcha) {
  exit;
 }
 
-    $stmt = $conn->prepare("INSERT INTO users(username,password,email,fullname,tablename) VALUES(?,?,?,?,?)");
-    $stmt->bind_param("sssss", $username, $password, $email, $fullname, $tablename);
+    $stmt = $conn->prepare("INSERT INTO users(username,password,email,fullname,tablename,question1,answer1) VALUES(?,?,?,?,?,?,?)");
+    $stmt->bind_param("sssssss", $username, $password, $email, $fullname, $tablename, $question1, $answer1);
 
     if ($stmt->execute()) {
-        $_SESSION['msg'] = "Registration Successful";
+        $_SESSION['msg'] = "Registration Successful";        
     } else {
         $_SESSION['msg'] = "Registration Unsuccessful, try with other username.";
         header("Location: register.php");
@@ -36,7 +38,7 @@ $conn->close();
 ?>
 <?php
 session_start();  
-include 'mftracker-v01/db_connect.php';
+include '../db_connect.php';
 
 // 5. Construct the SQL query with backticks around the variable
 $sql = "CREATE TABLE `{$tablename}` (
@@ -66,6 +68,6 @@ if ($stmt1->execute()) {
 // 7. Close connections
 $conn->close();
 $stmt1->close();
-header("Location: index.php");
+header("Location: ../../index.php");
 exit;
 ?>

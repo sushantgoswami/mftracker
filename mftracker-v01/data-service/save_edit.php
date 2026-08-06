@@ -1,8 +1,13 @@
 <?php
 
-include 'db_connect.php';
+include '../db_connect.php';
   
 session_start();
+
+if (!isset($_SESSION['username'])) {
+    header("Location: ../../login.php");
+    exit;
+}
 
 $id = $_SESSION['id'];
 $fundname = $_SESSION['fundname'];
@@ -12,14 +17,13 @@ $units = $_POST['units'];
 $isincode = $_SESSION['isincode'];
 
 	$stmt = $conn->prepare("UPDATE `" . $_SESSION['tablename'] . "` SET Purchase_NAV = ?, Units = ? WHERE id = ?");
-	$stmt->bind_param("iii", $purchasenav, $units, $id);
-	$stmt->execute();
+	$stmt->bind_param("ddi", $purchasenav, $units, $id);
 	$result = $stmt->get_result();
 
     if ($stmt->execute()) {
-        $msg = "Data saved successfully.";
+        $_SESSION['msg'] = "Data saved successfully.";
     } else {
-        $msg = "Error: ";
+        $_SESSION['msg'] = "Error: Saving data.";
     }
 echo $purchasenav;
 echo $units;
@@ -28,10 +32,7 @@ echo $msg;
     $stmt->close();
     $conn->close();
 
-$extra="index.php";
-$host=$_SERVER['HTTP_HOST'];
-$uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-header("location:http://$host$uri/$extra");
+header("location: ../index.php");
 exit();
 
 ?>

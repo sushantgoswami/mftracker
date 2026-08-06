@@ -1,44 +1,46 @@
 <?php
 session_start();
+include "../db_connect.php";
 
-include 'db_connect.php';
+$username = $_POST['username'];
+$_SESSION['username'] = $username;
+$captcha_verify = $_POST['Verify'];
+$captcha = $_SESSION['Captcha'];
+// $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-$sql = "SELECT DISTINCT Fund_Name FROM `" . $_SESSION['tablename'] . "` ORDER BY Fund_Name";
-$result = $conn->query($sql);
-
-if(isset($_POST['submit']))
-{
-
-$fundname=$_POST['fundname']; // Get Data
-$date=$_POST['date']; // Get Data
-$purchasenav=$_POST['purchasenav']; // Get Data
-$units=$_POST['units']; // Get Data
-    
-$_SESSION['fundname']=$fundname;
-$_SESSION['date']=$date;
-$_SESSION['purchasenav']=$purchasenav;
-$_SESSION['units']=$units;
-    
-$extra="save.php";
-$host=$_SERVER['HTTP_HOST'];
-$uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-header("location:http://$host$uri/$extra");
-exit();
-
+if ($captcha_verify != $captcha) {
+ $_SESSION['msg'] = "Captcha code mismatch";
+ header("Location: index.php"); 
+ exit;
 }
+	$sql = "SELECT * FROM users WHERE username = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+	$result = $stmt->get_result();
+    while ($row = $result->fetch_assoc())
+    {
+        $id = $row['id'];
+        $username = $row['username'];
+        $fullname = $row['fullname'];
+        $question1 = $row['question1'];
+        $answer = $row['answer1'];
+    }
 
+$Captcha = random_int(10000, 99999);
+$_SESSION["Captcha"] = $Captcha;
+$_SESSION["answer"] = $answer;
+$stmt->close();
+$conn->close();
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Enter the Purchase data</title>
-    <link rel="icon" type="image/x-icon" href="icons/golden-indian-rupee.ico">
-    <!-- <h2>MF Information Form, Enter the Purchase data</h2> -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/style6.css">
-    <style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Password forgot Form</title>
+  <style>
         /* Select Dropdown */
 		.input-group select {
 		  width: 100%;
@@ -85,8 +87,8 @@ exit();
 		    color: #818cf8;
 		    background: #1f2a0f;
 		    border-radius: 4px;
-        }
-        
+        }     
+      
     /* Reset & Base Styles */
     * {
       box-sizing: border-box;
@@ -242,51 +244,88 @@ exit();
     .submit-btn:active {
       transform: translateY(0);
     }
-</style>
+      
+    /* Container holding both field groups */
+    .form-row {
+      display: flex;       /* Displays children horizontally */
+      gap: 10px;           /* Adds space between the columns */
+      margin-bottom: 10px; /* Adds spacing below the row */
+    }
 
+    /* Individual column wrappers */
+    .form-group {
+      flex: 1;             /* Makes both columns equal width */
+      display: flex;
+      flex-direction: column; /* Stack label above the input */
+    }
+
+    /* Styling the inputs to fit their containers */
+    .form-group input {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box; /* Includes padding in width calculation */
+    }
+  </style>
 </head>
 <body>
-<div class="form-container">
-<form class="fancy-form" name=inputform method="POST">
-    <h2>Enter the Purchase data</h2>
-    <div class="input-group">
-    <select name="fundname" id="fundname">
-    <option value="">-- Select Fund Name --</option>
 
-    <?php
-    while($row = $result->fetch_assoc()) {
-        ?>
-        <option value="<?php echo htmlspecialchars($row['Fund_Name']); ?>">
-            <?php echo htmlspecialchars($row['Fund_Name']); ?>
-        </option>
-        $conn->close();
-        <?php
-    }
-    ?>
-    </select>
-    <label for="fundname">Fund Name</label>
-    </div>
+  <div class="form-container">
+    <h2>mftracker password forgot</h2>
     
-    <div class="input-group">
-     <input type="date" id="date" name="date" required>
-     <label for="date">Date</label>
-    </div>
-    
-	<div class="input-group">
-    <input type="number" step=".001" id="purchasenav" name="purchasenav" required>
-    <label for="purchasenav">Purchase NAV</label>
-    </div>
-    
-	<div class="input-group">   
-    <input type="number" step=".001" id="units" name="units" required>
-    <label for="units">Units</label>    
-	</div>
-    
-    <button type="submit" class="submit-btn" name="submit">Submit</button>
-
-    <p style="padding-left:5%;"><font size="3">Return to main Page <a href="index.php">Click Here</a></font></font></p>
-</form>
-</div>    
+    <form class="fancy-form" action="forgot_password_verify.php" method="post">
+      <!-- Name Field -->
+      <div class="input-group">
+        <input style="background-color:#66ff66" type="text" id="username" name="username" placeholder="<? echo $username ?>" disabled>
+        <label for="username"></label>
+      </div>        
+      <div class="input-group">
+        <input style="background-color:#66ff66" type="text" id="fullname" name="fullname" placeholder="<? echo $fullname ?>" disabled>
+        <label for="username"></label>
+      </div>        
+      <!-- Password Field -->
+      <div class="input-group">
+        <input type="password" id="password1" name="password1" placeholder=" " maxlength="30" minlength="8" required autocomplete="off">
+        <label for="password1">New Password (8 Char)</label>
+      </div>
+	  
+	  <!-- Password Field -->
+      <div class="input-group">
+        <input type="password" id="password2" name="password2" placeholder=" " maxlength="30" minlength="8" required autocomplete="off">
+        <label for="password2">Confirm Password (8 Char)</label>
+      </div>
+        
+      <div class="input-group">
+        <input style="background-color:#66ff66" type="text" id="question1" name="question1" placeholder="<? echo $question1 ?>" disabled>
+        <label for="question1"></label>
+      </div> 
+        
+      <div class="input-group">
+        <input type="text" id="answer1" name="answer1" placeholder=" " maxlength="30" minlength="3" required>
+        <label for="answer1">Answer</label>
+      </div> 
+        
+      <!-- Native Accent Checkbox -->
+      <div class="checkbox-group">
+        <input type="checkbox" id="terms" required>
+        <label for="terms">I agree to the privacy policy</label>
+      </div>     
+      
+      <div class="form-row">
+      <div class="input-group"> 
+        <input type="text" id="Captcha" value="<? echo $Captcha;?>" name="Captcha" disabled>
+        <label for="Captcha">Captcha</label>
+      </div>
+      <div class="input-group"> 
+        <input type="text" id="Verify" name="Verify" maxlength="8" minlength="4">
+        <label for="Verify">Verify</label>
+      </div></div>
+      
+      <!-- Submit Button -->
+      <button type="submit" class="submit-btn" value="Login">Submit</button>
+       
+      <p>➜ Back to Main Page <a href="index.php">Click Here</a></p>
+    </form>
+  </div>
 
 </body>
 </html>

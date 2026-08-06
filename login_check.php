@@ -28,7 +28,7 @@ if ($row = $result->fetch_assoc()) {
         exit;
     }
 }
-$_SESSION['failure'] = "Username or Password Incorrect.!";
-header("Location: login.php");
+$_SESSION['msg'] = "Username or Password Incorrect.!";
+header("Location: index.php");
 exit;
 ?>

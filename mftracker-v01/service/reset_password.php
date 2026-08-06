@@ -1,8 +1,13 @@
+<!DOCTYPE html>
 <?php
 session_start();
 
-if (isset($_SESSION['username'])) { header("Location: index.php"); exit; }
+if (!isset($_SESSION['username'])) { header("Location: index.php"); exit; }
 if (isset($_SESSION['msg'])) { echo "<script> alert('" . addslashes($_SESSION['msg']) . "'); </script>"; unset($_SESSION['msg']); }
+$Captcha = random_int(10000, 99999);
+$_SESSION["Captcha"] = $Captcha;
+$username = $_SESSION['username'];
+$fullname = $_SESSION['fullname'];
 ?>
 
 <!DOCTYPE html>
@@ -10,9 +15,56 @@ if (isset($_SESSION['msg'])) { echo "<script> alert('" . addslashes($_SESSION['m
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Form</title>
-  <link rel="icon" type="image/x-icon" href="mftracker-v01/icons/golden-indian-rupee.ico">
+  <title>Password Reset Form</title>
   <style>
+        /* Select Dropdown */
+		.input-group select {
+		  width: 100%;
+		  padding: 16px;
+		  background: rgba(255, 255, 255, 0.05);
+		  border: 1px solid rgba(255, 255, 255, 0.15);
+		  border-radius: 12px;
+		  outline: none;
+		  color: #fff;
+		  font-size: 16px;
+		  transition: all 0.3s ease;
+		  appearance: none;
+		  -webkit-appearance: none;
+		  -moz-appearance: none;
+		  cursor: pointer;
+		
+		  /* Custom arrow */
+		  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M1.5 5.5L8 12l6.5-6.5' stroke='white' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+		  background-repeat: no-repeat;
+		  background-position: right 15px center;
+		  background-size: 14px;
+		}
+		
+		/* Focus */
+		.input-group select:focus {
+		  border-color: #6366f1;
+		  background-color: rgba(255, 255, 255, 0.08);
+		  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+		}
+		
+		/* Dropdown options */
+		.input-group select option {
+		  background: #1f2937;
+		  color: #fff;
+		}
+		      
+		/* Float label when focused or valid */
+		.input-group select:focus ~ label,
+		.input-group select:valid ~ label {
+		    top: -10px;
+		    left: 12px;
+		    font-size: 12px;
+		    padding: 0 6px;
+		    color: #818cf8;
+		    background: #1f2a0f;
+		    border-radius: 4px;
+        }     
+      
     /* Reset & Base Styles */
     * {
       box-sizing: border-box;
@@ -168,38 +220,72 @@ if (isset($_SESSION['msg'])) { echo "<script> alert('" . addslashes($_SESSION['m
     .submit-btn:active {
       transform: translateY(0);
     }
+      
+    /* Container holding both field groups */
+    .form-row {
+      display: flex;       /* Displays children horizontally */
+      gap: 10px;           /* Adds space between the columns */
+      margin-bottom: 10px; /* Adds spacing below the row */
+    }
+
+    /* Individual column wrappers */
+    .form-group {
+      flex: 1;             /* Makes both columns equal width */
+      display: flex;
+      flex-direction: column; /* Stack label above the input */
+    }
+
+    /* Styling the inputs to fit their containers */
+    .form-group input {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box; /* Includes padding in width calculation */
+    }
   </style>
 </head>
 <body>
 
   <div class="form-container">
-    <h2>mftracker Login</h2>
-    <p>We would love to hear from you. Find the full code in github.</p>
+    <h2>mftracker password reset</h2>
     
-    <form class="fancy-form" action="login_check.php" method="post">
+    <form class="fancy-form" action="reset_password_check.php" method="post">
       <!-- Name Field -->
       <div class="input-group">
-        <input type="text" id="username" name="username" placeholder=" " maxlength="30" minlength="8"required autocomplete="off">
-        <label for="username">User ID</label>
-      </div>
-
-      <!-- Email Field -->
+        <input type="text" style="background-color:#00e600;" id="username" name="username" placeholder="<? echo $username ?>" minlength="8" disabled>
+      </div>        
+        
+      <!-- Password Field -->
       <div class="input-group">
-        <input type="password" id="password" name="password" placeholder=" " maxlength="30" minlength="8" required autocomplete="off">
-        <label for="password">Password</label>
+        <input type="password" id="password1" name="password1" minlength="8" placeholder=" " required autocomplete="off">
+        <label for="password1">New Password (8 Char)</label>
       </div>
-
+	  
+	  <!-- Password Field -->
+      <div class="input-group">
+        <input type="password" id="password2" name="password2" minlength="8" placeholder=" " required autocomplete="off">
+        <label for="password2">Confirm Password (8 Char)</label>
+      </div>
+        
       <!-- Native Accent Checkbox -->
       <div class="checkbox-group">
         <input type="checkbox" id="terms" required>
         <label for="terms">I agree to the privacy policy</label>
+      </div>     
+      
+      <div class="form-row">
+      <div class="input-group"> 
+        <input type="text" id="Captcha" value="<? echo $Captcha;?>" name="Captcha" disabled>
+        <label for="Captcha">Captcha</label>
       </div>
-        
+      <div class="input-group"> 
+        <input type="text" id="Verify" name="Verify">
+        <label for="Verify">Verify</label>
+      </div></div>
+      
       <!-- Submit Button -->
       <button type="submit" class="submit-btn" value="Login">Submit</button>
        
-      <p> ➜➜➜ <a href="mftracker-v01/service/register.php">New user Registration</a> ➜➜➜ <a href="mftracker-v01/service/forgot_password.php">Forgot Password</a></p>
-
+      <p>➜ Back to Main Page <a href="../index.php">Click Here</a></p>
     </form>
   </div>
 

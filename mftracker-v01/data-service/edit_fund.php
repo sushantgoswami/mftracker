@@ -1,42 +1,44 @@
 <?php
     
 session_start();
-
-if(isset($_POST['submit']))
-{
-
-$fundname=$_POST['fundname']; // Get Data
-$date=$_POST['date']; // Get Data
-$purchasenav=$_POST['purchasenav']; // Get Data
-$units=$_POST['units']; // Get Data
-$isincode=$_POST['isincode']; // Get Data
-    
-$_SESSION['fundname']=$fundname;
-$_SESSION['date']=$date;
-$_SESSION['purchasenav']=$purchasenav;
-$_SESSION['units']=$units;
-$_SESSION['isincode']=$isincode;
-    
-$extra="save_new.php";
-$host=$_SERVER['HTTP_HOST'];
-$uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-header("location:http://$host$uri/$extra");
-exit();
-
+if (!isset($_SESSION['username'])) {
+    header("Location: ../../login.php");
+    exit;
 }
 
+include '../db_connect.php';
+
+if (isset($_GET['id'])) {
+
+    $id = (int)$_GET['id'];
+    $_SESSION['id'] = $id;
+
+    $stmt = $conn->prepare("SELECT * FROM `" . $_SESSION['tablename'] . "` WHERE id = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+	$result = $stmt->get_result();
+    while ($row = $result->fetch_assoc())
+    {
+        $fundname = $row['Fund_Name'];
+        $isincode = $row['ISIN_Code'];
+        $indiadate = date('d-m-Y', strtotime($row['Date']));
+        $date = $row['Date'];
+        $purchasenav = $row['Purchase_NAV'];
+        $units = $row['Units'];
+    }
+    $stmt->close();
+}
+$conn->close();
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/style6.css">
-    <title>New fund form</title>
-    <link rel="icon" type="image/x-icon" href="icons/golden-indian-rupee.ico">
-    <!-- <h2>MF Information Form, Enter the Purchase data</h2> -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mftracker edit Form</title>
+  <link rel="icon" type="image/x-icon" href="../icons/golden-indian-rupee.ico">
+  <style>
     /* Reset & Base Styles */
     * {
       box-sizing: border-box;
@@ -192,42 +194,48 @@ exit();
     .submit-btn:active {
       transform: translateY(0);
     }
-</style>    
+  </style>
 </head>
 <body>
-<div class="form-container">
-    <form class="fancy-form" name=inputform method="POST">
-        <h2>Add New Mutual Fund</h2>
+
+  <div class="form-container">
+    <h2>Edit Mutual Fund Details</h2>
+      <p> </p>
     
-    <div class="input-group">
-    <input type="text" id="fundname" name="fundname" required>
-    <label for="fundname">Fund Name</label>
-    </div>
+    <form class="fancy-form" action="save_edit.php" method="post">
+      <!-- Name Field -->
+      <div class="input-group">
+        <input type="text" id="fundname" name="fundname" value="<? echo $fundname; ?>" disabled>
+        <label for="fundname">Fund Name</label>
+      </div>
+
+      <div class="input-group">
+        <input type="text" id="isincode" name="isincode" value="<? echo $isincode; ?>" disabled>
+        <label for="isincode">ISIN Code</label>
+      </div>
         
-    <div class="input-group">
-    <input type="text" name="isincode" id="isincode" required>
-    <label for="isincode">ISIN Code</label>
-    </div>
+      <div class="input-group">
+        <input type="text" id="date" name="date" value="<? echo $indiadate; ?>" disabled>
+        <label for="date">Date</label>
+      </div>
+  
+      <div class="input-group">
+        <input type="number" id="purchasenav" step=".00001" name="purchasenav" value="<? echo $purchasenav; ?>" required>
+        <label for="purchasenav">Purchase NAV</label>
+      </div>    
         
-	<div class="input-group">
-    <input type="date" name="date" id="date" required>
-    <label for="date">Purchase Date</label>
-    </div>
+      <div class="input-group">
+        <input type="number" id="units" step=".00001" name="units" value="<? echo $units; ?>" required>
+        <label for="units">Units</label>
+      </div>
         
-	<div class="input-group">
-    <input type="number" step=".001" name="purchasenav" id="purchasenav" required>
-    <label for="purchasenav">Purchase NAV</label>
-    </div>
-        
- 	<div class="input-group">       
-    <input type="number" step=".001" name="units" id="units" required>
-    <label for="units">Purchased Units</label>
-    </div>
-    
-    <button type="submit" class="submit-btn" name="submit">Submit</button>
-        
-    <p style="padding-left:10%;"><font size="3">Return to main Page <a href="index.php">Click Here</a></font></font></p>
-</form>
-</div>
+      <!-- Submit Button -->
+      <button type="submit" class="submit-btn" value="Login">Submit</button>
+       
+      <p>➜ Return to main page <a href="../index.php">Click Here</a></p>
+
+    </form>
+  </div>
+
 </body>
 </html>

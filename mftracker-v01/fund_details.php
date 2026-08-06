@@ -26,7 +26,7 @@ while ($row1 = $result1->fetch_assoc()) {
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="../mftracker-v01/css/style5.css">
+    <link rel="stylesheet" href="css/style5.css">
     <title>Mutual Fund Records</title>
     <link rel="icon" type="image/x-icon" href="icons/golden-indian-rupee.ico">
 </head>
@@ -64,13 +64,13 @@ while ($row1 = $result1->fetch_assoc()) {
         $class = ($row['Percentage'] >= 0) ? "profit" : "loss";
         echo "<td class='$class'>".number_format($row['Percentage'], 2)." %</td>";
         echo "<td>
-        <a href='edit_fund.php?id=".$row['id']."'
+        <a href='data-service/edit_fund.php?id=".$row['id']."'
 		onclick=\"return confirm('Edit this record?');\">
 		<button style='background:#FFA500;color:white;border:none;padding:3px 6px;border-radius:5px;'>
 		Edit
 		</button>
 		</a>
-		<a href='delete_fund.php?id=".$row['id']."'
+		<a href='data-service/delete_fund.php?id=".$row['id']."'
 		onclick=\"return confirm('Delete this record?');\">
 		<button style='background:#dc3545;color:white;border:none;padding:3px 6px;border-radius:5px;'>
 		Delete

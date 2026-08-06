@@ -1,51 +1,7 @@
-<!DOCTYPE html>
-<html>
-    <head>
-    <meta charset="UTF-8">
-    <title>mftracker update</title>
-    <link rel="stylesheet" href="css/style5.css">
-    </head>
-<body style="background-color:#e6ffe6;"> 
-<div class='menu'>
-<p style="padding-left:20%;"><font color=Red><font size="4">Return to Main Page <a href="index.php">Click Here</a></font></font></p>
-</div>
-    
 <?php
     
 session_start();
 include 'db_connect.php';
-
-$filename = 'NAVAll.txt';
-
-// Check if file exists to prevent errors
-if (file_exists($filename)) {
-    // Get file modification time and current time
-    $fileTime = filemtime($filename);
-    $currentTime = time();
-
-    // Check if the difference is less than 3600 seconds (1 hour)
-    if (($currentTime - $fileTime) <= 3600) {
-        echo "The file was modified within the last hour. Not downloading data from AMFI. <br>";
-        echo "Proceeding with local NAV file.<br>";
-    } else {
-        echo "The file is older than 1 hour. Proceeding to download.. <br>";
-		$url = "https://portal.amfiindia.com/spages/NAVAll.txt";
-		$savePath = "NAVAll.txt";
-		$remoteFile = fopen($url, 'r');
-		if ($remoteFile) {
-    		$result = file_put_contents($savePath, $remoteFile);    
-    	if ($result !== false) {
-        echo "File downloaded successfully!<br>";
-    	} else {
-        echo "Failed to save the file.<br>";
-    }
-} else {
-    echo "Could not open the remote URL.";
-} 
-    }
-} else {
-    echo "File does not exist.";
-}
 
 // Get unique fund names
 $sql = "SELECT DISTINCT ISIN_Code FROM `" . $_SESSION['tablename'] . "`";
@@ -94,21 +50,14 @@ while ($row = $result->fetch_assoc()) {
         
         $stmt = $conn->prepare("UPDATE `" . $_SESSION['tablename'] . "` SET Current_NAV = ? WHERE ISIN_Code = ?");
         $stmt->bind_param("ss", $nav, $isin);
-
-        if ($stmt->execute()) {
-        echo "Data saved successfully. - $schemeCode $isin $nav<br>";
-        } else {
-        echo "Error: ";
-        }
+		$stmt->execute();
     	}
 		}
     // end of loop    
     }
 }
-$sql->close();
-$sql2->close();
 $stmt->close();
 $conn->close();
+// header("Location: ../index.php");
+// exit();
 ?>
-</body>
-</html>

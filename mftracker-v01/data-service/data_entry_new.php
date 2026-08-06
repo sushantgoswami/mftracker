@@ -1,18 +1,46 @@
 <?php
+    
 session_start();
 
-if (isset($_SESSION['username'])) { header("Location: index.php"); exit; }
-if (isset($_SESSION['msg'])) { echo "<script> alert('" . addslashes($_SESSION['msg']) . "'); </script>"; unset($_SESSION['msg']); }
+if (!isset($_SESSION['username'])) {
+    header("Location: ../../index.php");
+    exit;
+}
+if(isset($_POST['submit']))
+{
+
+$fundname=$_POST['fundname']; // Get Data
+$date=$_POST['date']; // Get Data
+$purchasenav=$_POST['purchasenav']; // Get Data
+$units=$_POST['units']; // Get Data
+$isincode=$_POST['isincode']; // Get Data
+    
+$_SESSION['fundname']=$fundname;
+$_SESSION['date']=$date;
+$_SESSION['purchasenav']=$purchasenav;
+$_SESSION['units']=$units;
+$_SESSION['isincode']=$isincode;
+    
+$extra="save_new.php";
+$host=$_SERVER['HTTP_HOST'];
+$uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
+header("location:http://$host$uri/$extra");
+exit();
+
+}
+
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Form</title>
-  <link rel="icon" type="image/x-icon" href="mftracker-v01/icons/golden-indian-rupee.ico">
-  <style>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/style6.css">
+    <title>New fund form</title>
+    <link rel="icon" type="image/x-icon" href="../icons/golden-indian-rupee.ico">
+    <!-- <h2>MF Information Form, Enter the Purchase data</h2> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
     /* Reset & Base Styles */
     * {
       box-sizing: border-box;
@@ -168,40 +196,43 @@ if (isset($_SESSION['msg'])) { echo "<script> alert('" . addslashes($_SESSION['m
     .submit-btn:active {
       transform: translateY(0);
     }
-  </style>
+</style>    
 </head>
 <body>
-
-  <div class="form-container">
-    <h2>mftracker Login</h2>
-    <p>We would love to hear from you. Find the full code in github.</p>
+<div class="form-container">
+    <form class="fancy-form" name=inputform method="POST">
+        <h2>Add New Mutual Fund</h2>
     
-    <form class="fancy-form" action="login_check.php" method="post">
-      <!-- Name Field -->
-      <div class="input-group">
-        <input type="text" id="username" name="username" placeholder=" " maxlength="30" minlength="8"required autocomplete="off">
-        <label for="username">User ID</label>
-      </div>
-
-      <!-- Email Field -->
-      <div class="input-group">
-        <input type="password" id="password" name="password" placeholder=" " maxlength="30" minlength="8" required autocomplete="off">
-        <label for="password">Password</label>
-      </div>
-
-      <!-- Native Accent Checkbox -->
-      <div class="checkbox-group">
-        <input type="checkbox" id="terms" required>
-        <label for="terms">I agree to the privacy policy</label>
-      </div>
+    <div class="input-group">
+    <input type="text" id="fundname" name="fundname" required>
+    <label for="fundname">Fund Name</label>
+    </div>
         
-      <!-- Submit Button -->
-      <button type="submit" class="submit-btn" value="Login">Submit</button>
-       
-      <p> ➜➜➜ <a href="mftracker-v01/service/register.php">New user Registration</a> ➜➜➜ <a href="mftracker-v01/service/forgot_password.php">Forgot Password</a></p>
-
-    </form>
-  </div>
-
+    <div class="input-group">
+    <input type="text" name="isincode" id="isincode" required>
+    <label for="isincode">ISIN Code</label>
+    </div>
+    <a style="color:#003300;" href="../service/know_isincode.php" target="_blank">Find ISIN Code</a>
+        
+	<div class="input-group">
+    <input type="date" name="date" id="date" required>
+    <label for="date">Purchase Date</label>
+    </div>
+        
+	<div class="input-group">
+    <input type="number" step=".00001" name="purchasenav" id="purchasenav" required>
+    <label for="purchasenav">Purchase NAV</label>
+    </div>
+        
+ 	<div class="input-group">       
+    <input type="number" step=".00001" name="units" id="units" required>
+    <label for="units">Purchased Units</label>
+    </div>
+    
+    <button type="submit" class="submit-btn" name="submit">Submit</button>
+        
+    <p style="padding-left:10%;"><font size="3">Return to main Page <a href="../index.php">Click Here</a></font></font></p>
+</form>
+</div>
 </body>
 </html>

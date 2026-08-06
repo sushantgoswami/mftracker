@@ -1,18 +1,41 @@
 <?php
 session_start();
 
-if (isset($_SESSION['username'])) { header("Location: index.php"); exit; }
-if (isset($_SESSION['msg'])) { echo "<script> alert('" . addslashes($_SESSION['msg']) . "'); </script>"; unset($_SESSION['msg']); }
+include '../db_connect.php';
+if (!isset($_SESSION['username'])) { header("Location: ../../index.php"); exit; }
+$sql = "SELECT DISTINCT Fund_Name FROM `" . $_SESSION['tablename'] . "` ORDER BY Fund_Name";
+$result = $conn->query($sql);
+
+if(isset($_POST['submit']))
+{
+
+$fundname=$_POST['fundname']; // Get Data
+$date=$_POST['date']; // Get Data
+$purchasenav=$_POST['purchasenav']; // Get Data
+$units=$_POST['units']; // Get Data
+    
+$_SESSION['fundname']=$fundname;
+$_SESSION['date']=$date;
+$_SESSION['purchasenav']=$purchasenav;
+$_SESSION['units']=$units;
+    
+header("location: data-service/save.php");
+exit();
+
+}
+
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Form</title>
-  <link rel="icon" type="image/x-icon" href="mftracker-v01/icons/golden-indian-rupee.ico">
-  <style>
+    <meta charset="UTF-8">
+    <title>Enter the Purchase data</title>
+    <link rel="icon" type="image/x-icon" href="../icons/golden-indian-rupee.ico">
+    <!-- <h2>MF Information Form, Enter the Purchase data</h2> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/style7.css">
+<style>
     /* Reset & Base Styles */
     * {
       box-sizing: border-box;
@@ -21,15 +44,15 @@ if (isset($_SESSION['msg'])) { echo "<script> alert('" . addslashes($_SESSION['m
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
-    body {
-      # background: linear-gradient(135deg, #0f172a, #1e1b4b);
-      background: linear-gradient(135deg, #1f2a0f, #2bcfc6);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
+    # body {
+    #   # background: linear-gradient(135deg, #0f172a, #1e1b4b);
+    #   background: linear-gradient(135deg, #1f2a0f, #2bcfc6);
+    #   min-height: 100vh;
+    #   display: flex;
+    #   justify-content: center;
+    #   align-items: center;
+    #   padding: 20px;
+    # }
 
     /* Container Card with Glassmorphism */
     .form-container {
@@ -70,6 +93,19 @@ if (isset($_SESSION['msg'])) { echo "<script> alert('" . addslashes($_SESSION['m
     .input-group {
       position: relative;
       width: 100%;
+    }
+    
+    /* Input & Textarea Elements */
+    .input-group select {
+      width: 100%;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      outline: none;
+      color: #001a00;
+      font-size: 16px;
+      transition: all 0.3s ease;
     }
 
     /* Input & Textarea Elements */
@@ -168,40 +204,49 @@ if (isset($_SESSION['msg'])) { echo "<script> alert('" . addslashes($_SESSION['m
     .submit-btn:active {
       transform: translateY(0);
     }
-  </style>
+</style>
 </head>
 <body>
+<div class="form-container">
+<form class="fancy-form" name=inputform method="POST">
+    <h2>Enter the Purchase data</h2>
+    <div class="input-group">
+    <select name="fundname" id="fundname">
+    <option value=""></option>
 
-  <div class="form-container">
-    <h2>mftracker Login</h2>
-    <p>We would love to hear from you. Find the full code in github.</p>
+    <?php
+    while($row = $result->fetch_assoc()) {
+        ?>
+        <option value="<?php echo htmlspecialchars($row['Fund_Name']); ?>">
+            <?php echo htmlspecialchars($row['Fund_Name']); ?>
+        </option>
+        $conn->close();
+        <?php
+    }
+    ?>
+    </select>
+    <label for="fundname"></label>
+    </div>
     
-    <form class="fancy-form" action="login_check.php" method="post">
-      <!-- Name Field -->
-      <div class="input-group">
-        <input type="text" id="username" name="username" placeholder=" " maxlength="30" minlength="8"required autocomplete="off">
-        <label for="username">User ID</label>
-      </div>
+    <div class="input-group">
+     <input type="date" id="date" name="date" required>
+     <label for="date">Date</label>
+    </div>
+    
+	<div class="input-group">
+    <input type="number" step=".00001" id="purchasenav" name="purchasenav" maxlength="12" minlength="1" required>
+    <label for="purchasenav">Purchase NAV</label>
+    </div>
+    
+	<div class="input-group">   
+    <input type="number" step=".00001" id="units" name="units" maxlength="12" minlength="1" required>
+    <label for="units">Units</label>    
+	</div>
+    
+    <button type="submit" class="submit-btn" name="submit">Submit</button>
 
-      <!-- Email Field -->
-      <div class="input-group">
-        <input type="password" id="password" name="password" placeholder=" " maxlength="30" minlength="8" required autocomplete="off">
-        <label for="password">Password</label>
-      </div>
-
-      <!-- Native Accent Checkbox -->
-      <div class="checkbox-group">
-        <input type="checkbox" id="terms" required>
-        <label for="terms">I agree to the privacy policy</label>
-      </div>
-        
-      <!-- Submit Button -->
-      <button type="submit" class="submit-btn" value="Login">Submit</button>
-       
-      <p> ➜➜➜ <a href="mftracker-v01/service/register.php">New user Registration</a> ➜➜➜ <a href="mftracker-v01/service/forgot_password.php">Forgot Password</a></p>
-
-    </form>
-  </div>
+</form>
+</div>    
 
 </body>
 </html>
