@@ -24,8 +24,13 @@ if ($row = $result->fetch_assoc()) {
         $_SESSION['tablename']=$tablename;
         $stmt->close();
 		$conn->close();
-        header("Location: mftracker-v01/index.php");
-        exit;
+        if ($username == "administrator") {
+         header("Location: mftracker-v01/admin/admin_index.php");  
+         exit();
+        } else {
+        header("Location: mftracker-v01/calculate.php");
+         exit();
+        }
     }
 }
 $_SESSION['msg'] = "Username or Password Incorrect.!";

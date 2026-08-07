@@ -2,27 +2,21 @@
 session_start();
 
 include '../db_connect.php';
+
 if (!isset($_SESSION['username'])) { header("Location: ../../index.php"); exit; }
-$sql = "SELECT DISTINCT Fund_Name FROM `" . $_SESSION['tablename'] . "` ORDER BY Fund_Name";
-$result = $conn->query($sql);
 
-if(isset($_POST['submit']))
+$isincode = (string) $_GET['id'];
+$_SESSION['isincode'] = $isincode;
+
+$stmt = $conn->prepare("SELECT * FROM `" . $_SESSION['tablename'] . "` WHERE ISIN_Code = ? LIMIT 1");
+$stmt->bind_param("s", $isincode);
+$stmt->execute();
+$result = $stmt->get_result();
+while ($row = $result->fetch_assoc())
 {
-
-$fundname=$_POST['fundname']; // Get Data
-$date=$_POST['date']; // Get Data
-$purchasenav=$_POST['purchasenav']; // Get Data
-$units=$_POST['units']; // Get Data
-    
-$_SESSION['fundname']=$fundname;
-$_SESSION['date']=$date;
-$_SESSION['purchasenav']=$purchasenav;
-$_SESSION['units']=$units;
-    
-header("location: data-service/save.php");
-exit();
-
+    $fundname = $row['Fund_Name'];
 }
+$stmt->close();
 
 ?>
 
@@ -34,8 +28,55 @@ exit();
     <link rel="icon" type="image/x-icon" href="../icons/golden-indian-rupee.ico">
     <!-- <h2>MF Information Form, Enter the Purchase data</h2> -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/style7.css">
-<style>
+   <style>
+        /* Select Dropdown */
+		.input-group select {
+		  width: 100%;
+		  padding: 16px;
+		  background: rgba(255, 255, 255, 0.05);
+		  border: 1px solid rgba(255, 255, 255, 0.15);
+		  border-radius: 12px;
+		  outline: none;
+		  color: #fff;
+		  font-size: 16px;
+		  transition: all 0.3s ease;
+		  appearance: none;
+		  -webkit-appearance: none;
+		  -moz-appearance: none;
+		  cursor: pointer;
+		
+		  /* Custom arrow */
+		  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M1.5 5.5L8 12l6.5-6.5' stroke='white' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+		  background-repeat: no-repeat;
+		  background-position: right 15px center;
+		  background-size: 14px;
+		}
+		
+		/* Focus */
+		.input-group select:focus {
+		  border-color: #6366f1;
+		  background-color: rgba(255, 255, 255, 0.08);
+		  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+		}
+		
+		/* Dropdown options */
+		.input-group select option {
+		  background: #1f2937;
+		  color: #fff;
+		}
+		      
+		/* Float label when focused or valid */
+		.input-group select:focus ~ label,
+		.input-group select:valid ~ label {
+		    top: -10px;
+		    left: 12px;
+		    font-size: 12px;
+		    padding: 0 6px;
+		    color: #818cf8;
+		    background: #1f2a0f;
+		    border-radius: 4px;
+        }
+        
     /* Reset & Base Styles */
     * {
       box-sizing: border-box;
@@ -43,16 +84,6 @@ exit();
       padding: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-
-    # body {
-    #   # background: linear-gradient(135deg, #0f172a, #1e1b4b);
-    #   background: linear-gradient(135deg, #1f2a0f, #2bcfc6);
-    #   min-height: 100vh;
-    #   display: flex;
-    #   justify-content: center;
-    #   align-items: center;
-    #   padding: 20px;
-    # }
 
     /* Container Card with Glassmorphism */
     .form-container {
@@ -93,19 +124,6 @@ exit();
     .input-group {
       position: relative;
       width: 100%;
-    }
-    
-    /* Input & Textarea Elements */
-    .input-group select {
-      width: 100%;
-      padding: 16px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 12px;
-      outline: none;
-      color: #001a00;
-      font-size: 16px;
-      transition: all 0.3s ease;
     }
 
     /* Input & Textarea Elements */
@@ -208,24 +226,12 @@ exit();
 </head>
 <body>
 <div class="form-container">
-<form class="fancy-form" name=inputform method="POST">
+<form class="fancy-form" name=inputform action="data-service/save_modal.php" method="POST">
     <h2>Enter the Purchase data</h2>
+    
     <div class="input-group">
-    <select name="fundname" id="fundname">
-    <option value=""></option>
-
-    <?php
-    while($row = $result->fetch_assoc()) {
-        ?>
-        <option value="<?php echo htmlspecialchars($row['Fund_Name']); ?>">
-            <?php echo htmlspecialchars($row['Fund_Name']); ?>
-        </option>
-        $conn->close();
-        <?php
-    }
-    ?>
-    </select>
-    <label for="fundname"></label>
+    <input type="text" id="fundname" name="fundname" value="<? echo $fundname; ?>" readonly>
+    <label for="fundname">Fund name</label>
     </div>
     
     <div class="input-group">

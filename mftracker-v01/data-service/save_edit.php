@@ -32,7 +32,7 @@ echo $msg;
     $stmt->close();
     $conn->close();
 
-header("location: ../index.php");
+header("location: ../calculate.php");
 exit();
 
 ?>

@@ -3,6 +3,7 @@
 include '../db_connect.php';
   
 session_start();
+if (!isset($_SESSION['username'])) { header("Location: ../../index.php"); exit; }
 
 $fundname = $_SESSION['fundname'];
 $date = $_SESSION['date'];
@@ -23,7 +24,7 @@ $currentnav = "0";
     $stmt->close();
     $conn->close();
 
-header("location: ../index.php");
+header("location: ../calculate.php");
 exit();
 
 ?>

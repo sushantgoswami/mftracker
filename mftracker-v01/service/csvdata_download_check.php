@@ -42,8 +42,8 @@ if ($fundname == 'allfunds') {
  while ($row = $result->fetch_assoc()) {
   		echo "<tr>";
         echo "<td>".$row['ISIN_Code']."</td>"; echo ",";
-     	echo "<td>".$row['Date']."</td>"; echo ",";
         echo "<td>".$row['Fund_Name']."</td>"; echo ",";
+     	echo "<td>".$row['Date']."</td>"; echo ",";
         echo "<td>".$row['Purchase_NAV']."</td>"; echo ",";
         echo "<td>".$row['Units']."</td>";
         echo "</tr>";
@@ -60,8 +60,8 @@ if ($fundname != 'allfunds') {
  while ($row = $result->fetch_assoc()) {
   		echo "<tr>";
         echo "<td>".$row['ISIN_Code']."</td>"; echo ",";
-     	echo "<td>".$row['Date']."</td>"; echo ",";
         echo "<td>".$row['Fund_Name']."</td>"; echo ",";
+     	echo "<td>".$row['Date']."</td>"; echo ",";
         echo "<td>".$row['Purchase_NAV']."</td>"; echo ",";
         echo "<td>".$row['Units']."</td>";
         echo "</tr>";

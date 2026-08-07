@@ -16,7 +16,7 @@ if (isset($_GET['id'])) {
     $stmt->bind_param("i", $id);
 
     if ($stmt->execute()) {
-        header("Location: ../index.php"); // Change to your page name
+        header("Location: ../calculate.php"); // Change to your page name
         $_SESSION['msg'] = "Record deleted.";
         exit;
     } else {

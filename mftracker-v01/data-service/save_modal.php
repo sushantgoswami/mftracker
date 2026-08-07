@@ -5,10 +5,10 @@ include '../db_connect.php';
 session_start();
 if (!isset($_SESSION['username'])) { header("Location: ../../index.php"); exit; }
 
-$fundname = $_SESSION['fundname'];
-$date = $_SESSION['date'];
-$purchasenav = $_SESSION['purchasenav'];
-$units = $_SESSION['units'];
+$fundname = $_POST['fundname'];
+$date = $_POST['date'];
+$purchasenav = $_POST['purchasenav'];
+$units = $_POST['units'];
 $isincode = $_SESSION['isincode'];
 $currentnav = "0";
 
