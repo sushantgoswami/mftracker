@@ -28,7 +28,16 @@ if ($row = $result->fetch_assoc()) {
          header("Location: mftracker-v01/admin/admin_index.php");  
          exit();
         } else {
-        header("Location: mftracker-v01/calculate.php");
+        // Clear and readable log message format
+		 $logFile = "mftracker-v01/log/login_check.log";
+		 $logMessage = "[" . date("d-m-Y H:i:s") . "] " . basename($_SERVER['PHP_SELF']) . " (MSG:0001): file executed successfully. $username logged in." . PHP_EOL;
+		 $_SESSION['logMessage'] = $logMessage;
+		 $_SESSION['logFile'] = $logFile;
+		 include 'mftracker-v01/log/logger.php';
+		 unset($_SESSION['logMessage']);
+		 unset($_SESSION['logFile']);
+		 // Clear and readable log message format
+         header("Location: mftracker-v01/calculate.php");
          exit();
         }
     }

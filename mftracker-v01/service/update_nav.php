@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<body>
+<?php
+    
+session_start();
+include '../db_connect.php';
+include '../config/encrypt_code.php';
+
+$filename = '../NAVAll.txt';
+$id = (string)$_GET['id'];
+
+if ($id == $encryptedcode) {
+// main code start
+// Check if file exists to prevent errors
+if (file_exists($filename)) {
+    // Get file modification time and current time
+    $fileTime = filemtime($filename);
+    $currentTime = time();
+
+    // Check if the difference is less than 3600 seconds (1 hour)
+    if (($currentTime - $fileTime) <= 3600) {
+        echo "The file was modified within the last hour. Not downloading data from AMFI. <br>";
+        echo "Proceeding with local NAV file.<br>";
+    } else {
+        echo "The file is older than 1 hour. Proceeding to download.. <br>";
+		$url = "https://portal.amfiindia.com/spages/NAVAll.txt";
+		$savePath = "../NAVAll.txt";
+		$remoteFile = fopen($url, 'r');
+		if ($remoteFile) {
+    		$result = file_put_contents($savePath, $remoteFile);    
+    	if ($result !== false) {
+        echo "File downloaded successfully!<br>";
+    	} else {
+        echo "Failed to save the file.<br>";
+    }
+} else {
+    echo "Could not open the remote URL.";
+} 
+    }
+} else {
+    echo "File does not exist.";
+}
+
+// Get unique fund names
+   
+// SQL query to exclude the 'admin' table
+$tablequery = "SHOW TABLES WHERE `Tables_in_$dbname` != 'users' AND `Tables_in_$dbname` != 'administrator26131'";
+$stmt1 = $conn->query($tablequery);
+
+while ($rowtable = $stmt1->fetch_array()) {
+        $tablenamex = $rowtable[0];
+        // main code
+        // Get unique fund names
+		$sql = "SELECT DISTINCT ISIN_Code FROM $tablenamex";
+		$result = $conn->query($sql);
+		while ($row = $result->fetch_assoc()) 
+		{
+	
+    	$isincode = $row['ISIN_Code'];
+	
+    	// Query for each unique fund
+    	$sql2 = "SELECT * FROM $tablenamex WHERE ISIN_Code='$isincode'";
+    	$result2 = $conn->query($sql2);
+    	while ($row2 = $result2->fetch_assoc()) 
+			{
+    	    // echo "<td>".$row2['ISIN_Code']."</td>";
+    	    // bigin loop
+    	 
+    		$isin = $row2['ISIN_Code'];    // Replace with your ISIN
+			$lines = file("../NAVAll.txt", FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+			foreach ($lines as $line) 
+				{
+	
+				$fields = explode(";", $line);
+	
+				// Skip invalid lines
+				if (count($fields) < 6) {
+				continue;
+				}
+	
+				// Compare both ISIN columns
+				if (strcasecmp(trim($fields[1]), $isin) == 0 ||
+				strcasecmp(trim($fields[2]), $isin) == 0) {
+	
+				$schemeCode = $fields[0];
+				$schemeName = $fields[3];
+				$nav        = $fields[4];
+				$date       = $fields[5];
+    	    
+				$stmt = $conn->prepare("UPDATE $tablenamex SET Current_NAV = ? WHERE ISIN_Code = ?");
+				$stmt->bind_param("ss", $nav, $isin);
+				$stmt->execute();
+				// if ($stmt->execute()) {
+				// echo "Data saved successfully. - $schemeCode $isin $nav<br>";
+				// } else {
+				// echo "Error: - $schemeCode $isin $nav<br>";
+				// }
+				}
+				}   
+			}
+		}
+        // main code end
+}
+    
+
+$stmt->close();
+$conn->close();
+
+// Clear and readable log message format
+$logFolder = "../log/";
+$logFile = "update_nav.log";
+$logMessage = "[" . date("d-m-Y H:i:s") . "] " . basename($_SERVER['PHP_SELF']) . " (MSG:0001): file executed successfully." . PHP_EOL;
+$_SESSION['logMessage'] = $logMessage;
+$_SESSION['logFile'] = "$logFolder$logFile";
+include '../log/logger.php';
+unset($_SESSION['logMessage']);
+unset($_SESSION['logFile']);
+// Clear and readable log message format
+    
+sleep(1);
+} 
+// main code end
+?>
+</body>
+</html>

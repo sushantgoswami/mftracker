@@ -1,21 +1,37 @@
-<!DOCTYPE html>
 <?php
 session_start();
 
-if (isset($_SESSION['username'])) { header("Location: ../index.php"); exit; }
-if (isset($_SESSION['msg'])) { echo "<script> alert('" . addslashes($_SESSION['msg']) . "'); </script>"; unset($_SESSION['msg']); }
+include '../db_connect.php';
+
+if (!isset($_SESSION['username'])) { header("Location: ../../index.php"); exit; }
+
+$userid = (string) $_GET['id'];
+// $_SESSION['userid'] = $userid;
+
 $Captcha = random_int(10000, 99999);
 $_SESSION["Captcha"] = $Captcha;
+
+$stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+$stmt->bind_param("s", $userid);
+$stmt->execute();
+$result = $stmt->get_result();
+while ($row = $result->fetch_assoc())
+{
+    $tablename_user = $row['tablename'];
+}
+$stmt->close();
+
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="../icons/golden-indian-rupee.ico">
-  <title>mftracker register Form</title>
-  <style>
+    <meta charset="UTF-8">
+    <title>Enter the Purchase data</title>
+    <link rel="icon" type="image/x-icon" href="../icons/golden-indian-rupee.ico">
+    <!-- <h2>MF Information Form, Enter the Purchase data</h2> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   <style>
         /* Select Dropdown */
 		.input-group select {
 		  width: 100%;
@@ -62,24 +78,14 @@ $_SESSION["Captcha"] = $Captcha;
 		    color: #818cf8;
 		    background: #1f2a0f;
 		    border-radius: 4px;
-        }     
-      
+        }
+        
     /* Reset & Base Styles */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    body {
-      # background: linear-gradient(135deg, #0f172a, #1e1b4b);
-      background: linear-gradient(135deg, #1f2a0f, #2bcfc6);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
     }
 
     /* Container Card with Glassmorphism */
@@ -219,102 +225,49 @@ $_SESSION["Captcha"] = $Captcha;
     .submit-btn:active {
       transform: translateY(0);
     }
-      
-    /* Container holding both field groups */
+       
     .form-row {
       display: flex;       /* Displays children horizontally */
       gap: 10px;           /* Adds space between the columns */
       margin-bottom: 10px; /* Adds spacing below the row */
     }
-
-    /* Individual column wrappers */
-    .form-group {
-      flex: 1;             /* Makes both columns equal width */
-      display: flex;
-      flex-direction: column; /* Stack label above the input */
-    }
-
-    /* Styling the inputs to fit their containers */
-    .form-group input {
-      width: 100%;
-      padding: 8px;
-      box-sizing: border-box; /* Includes padding in width calculation */
-    }
-  </style>
+</style>
 </head>
 <body>
-
-  <div class="form-container">
-    <h2>mftracker Register</h2>
-    <p>We would love to hear from you. Find the full code in github.      https://github.com/sushantgoswami/mftracker.git</p>
+<div class="form-container">
+<form class="fancy-form" name=inputform action="delete_user_check.php" method="POST">
+    <h2>Confirm Delete User and Table</h2>
     
-    <form class="fancy-form" action="register_check.php" method="post">
-      <!-- Name Field -->
-      <div class="input-group">
-        <input type="text" id="username" name="username" pattern="[^\s]+" placeholder=" " maxlength="30" minlength="8" required autocomplete="off">
-        <label for="username">User ID (8 Char, no spaces)</label>
-      </div>
+    <div class="input-group">
+    <input type="text" id="userid" name="userid" value="<? echo $userid; ?>" readonly>
+    <label for="userid">userid</label>
+    </div>
+    
+    <div class="input-group">
+    <input type="text" id="tablename_user" name="tablename_user" value="<? echo $tablename_user; ?>" readonly>
+    <label for="tablename_user">tablename</label>
+    </div>
+    
+    <!-- Native Accent Checkbox -->
+    <div class="checkbox-group">
+    <input type="checkbox" id="tabledelete" name="tabledelete" value="yes">
+    <label for="tabledelete">Delete table also</label>
+    </div>
+    
+    <div class="form-row">
+    <div class="input-group"> 
+    <input type="text" id="Captcha" value="<? echo $Captcha;?>" name="Captcha" disabled>
+    <label for="Captcha">Captcha</label>
+    </div>
+    <div class="input-group"> 
+    <input type="text" id="Verify" name="Verify">
+    <label for="Verify">Verify</label>
+    </div></div>
+    
+    <button type="submit" class="submit-btn" name="submit">Delete User</button>
 
-      <div class="input-group">
-        <input type="text" id="fullname" name="fullname" placeholder=" " maxlength="30" minlength="8" required autocomplete="off">
-        <label for="fullname">User Full Name</label>
-      </div>     
-        
-      <div class="input-group">
-        <input type="email" id="email" name="email" placeholder=" " maxlength="30" minlength="8" required autocomplete="off">
-        <label for="email">Email ID</label>
-      </div>           
-        
-      <!-- Email Field -->
-      <div class="input-group">
-        <input type="password" id="password" name="password" maxlength="30" minlength="8" placeholder=" " required autocomplete="off">
-        <label for="password">Password (8 Char)</label>
-      </div>
-        
-      <div class="input-group">
-       <select name="question1" id="question1">
-        <option value="Which city your father born ?">Which city your father born ?</option>
-        <option value="Which city your mother born ?">Which city your mother born ?</option>
-        <option value="Which city your spouse born ?">Which city your spouse born ?</option>
-        <option value="Which city your grandfather born ?">Which city your grandfather born ?</option>
-        <option value="Which city you first met with spouse ?">Which city you first met with spouse ?</option>
-        <option value="Which city your 1st child born ?">Which city your 1st child born ?</option>
-        <option value="Which city your 2nd child born ?">Which city your 2nd child born ?</option>
-        <option value="Your favourite vegetable">Your favourite vegetable</option>
-        <option value="Your favourite fruit">Your favourite fruit</option>
-        <option value="Your favourite Car brand">Your favourite Car brand</option>
-        <option value="Your favourite Book">Your favourite Book</option>
-        <option value="Your favourite City">Your favourite City</option>
-       </select>
-       <label for="question1">Question 1</label>
-      </div>
-      <div class="input-group">
-        <input type="text" id="answer1" name="answer1" placeholder=" " maxlength="15" minlength="3" required autocomplete="off">
-        <label for="answer1">Answer 1</label>
-      </div>
-        
-      <!-- Native Accent Checkbox -->
-      <div class="checkbox-group">
-        <input type="checkbox" id="terms" required>
-        <label for="terms">I agree to the privacy policy</label>
-      </div>     
-      
-      <div class="form-row">
-      <div class="input-group"> 
-        <input type="text" id="Captcha" value="<? echo $Captcha;?>" name="Captcha" disabled>
-        <label for="Captcha">Captcha</label>
-      </div>
-      <div class="input-group"> 
-        <input type="text" id="Verify" maxlength="8" minlength="4" name="Verify">
-        <label for="Verify">Verify</label>
-      </div></div>
-      
-      <!-- Submit Button -->
-      <button type="submit" class="submit-btn" value="Login">Submit</button>
-       
-      <p>➜ Back to Login Page <a href="../../index.php">Click Here</a></p>
-    </form>
-  </div>
+</form>
+</div>    
 
 </body>
 </html>

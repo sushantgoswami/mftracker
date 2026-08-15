@@ -60,8 +60,8 @@ $gainloss_percent_total_value = ($gainloss_total_value / $purchase_total_value) 
     <table>
     <tr><th style="background-color: #eeffcc; color:green;"><p>➜ Current invested Value: </p></th><th><p><?php echo $current_total_value; ?></p></th></tr>
     <tr><th style="background-color: #eeffcc; color:green;"><p>➜ Total invested Value: </p></th><th><p><?php echo $purchase_total_value; ?></p></th></tr>
-    <tr><th style="background-color: #eeffcc; color:green;"><p>➜ Gain Loss Value: </p></th><p><? $class = ($gainloss_total_value >= 0) ? "profit" : "loss"; echo "<td class='$class'>".$gainloss_total_value."</td>"; ?></p></tr>
-    <tr><th style="background-color: #eeffcc; color:green;"><p>➜ Gain Loss Percent Value: </p></th><p><? $class = ($gainloss_percent_total_value >= 0) ? "profit" : "loss"; echo "<td class='$class'>".number_format($gainloss_percent_total_value, 2)." %</td>"; ?></p></tr>
+    <tr><th style="background-color: #eeffcc; color:green;"><p>➜ Gain Loss Value: </p></th><p><?php $class = ($gainloss_total_value >= 0) ? "profit" : "loss"; echo "<td class='$class'>".$gainloss_total_value."</td>"; ?></p></tr>
+    <tr><th style="background-color: #eeffcc; color:green;"><p>➜ Gain Loss Percent Value: </p></th><p><?php $class = ($gainloss_percent_total_value >= 0) ? "profit" : "loss"; echo "<td class='$class'>".number_format($gainloss_percent_total_value, 2)." %</td>"; ?></p></tr>
     </table>    
     <button type="button" onclick="window.location.reload();">Refresh Values</button>
     </div>
@@ -187,11 +187,11 @@ while ($row = $result->fetch_assoc()) {
 		?>
     	<td>
         <button class="btn btn-primary viewBtn1" data-toggle="modal" data-target="#Modal1"
-                data-id="<?= $isincode; ?>">
+                data-id="<?php echo $isincode; ?>">
             Details
         </button>
         <button style="background-color:orange" class="btn btn-primary viewBtn2" data-toggle="modal" data-target="#Modal2"
-                data-id="<?= $isincode; ?>">
+                data-id="<?php echo $isincode; ?>">
             Add
         </button>
     	</td>
@@ -203,7 +203,7 @@ $conn->close();
 </table>
 
 </div>
-<? 
+<?php 
 if ($purchase_total_value > 0) {
 $gainloss_total_value = $current_total_value - $purchase_total_value; 
 $gainloss_percent_total_value = ($gainloss_total_value / $purchase_total_value) * 100; }

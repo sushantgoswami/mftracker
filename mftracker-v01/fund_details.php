@@ -54,11 +54,11 @@ while ($row1 = $result1->fetch_assoc()) {
 		echo "<tr>";
         echo "<td class='fund-name'>".$row['Fund_Name']."</td>";
         echo "<td>" . date('d-m-Y', strtotime($row['Date'])) . "</td>";
-        echo "<td>".$row['Current_NAV']."</td>";
-        echo "<td>".$row['Purchase_NAV']."</td>";
-        echo "<td>".$row['Units']."</td>";
-        echo "<td>".$row['Purchase_Value']."</td>";
-        echo "<td>".$row['Current_Value']."</td>";
+        echo "<td>".round($row['Current_NAV'], 2)."</td>";
+        echo "<td>".round($row['Purchase_NAV'], 2)."</td>";
+        echo "<td>".round($row['Units'], 2)."</td>";
+        echo "<td>".number_format($row['Purchase_Value'], 2)."</td>";
+        echo "<td>".number_format($row['Current_Value'], 2)."</td>";
         $class = ($row['Gain_Loss'] >= 0) ? "profit" : "loss";
 		echo "<td class='$class'>".$row['Gain_Loss']."</td>";
         $class = ($row['Percentage'] >= 0) ? "profit" : "loss";

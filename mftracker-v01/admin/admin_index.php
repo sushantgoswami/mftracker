@@ -1,15 +1,27 @@
 <?php
 session_start();
 if (!isset($_SESSION['username'])) {
-    header("Location: ../login.php");
+    header("Location: ../../index.php");
     exit;
 }
+
 if (isset($_SESSION['msg'])) { echo "<script> alert('" . addslashes($_SESSION['msg']) . "'); </script>"; unset($_SESSION['msg']); }
 
 include '../db_connect.php';
 
 $username = $_SESSION['username'];
 
+$sql1 = "SELECT * FROM users WHERE username != 'administrator' ORDER BY username";
+$result1 = $conn->query($sql1);
+// $row1 = $result1->fetch_assoc();
+$rowcount = 0;
+while ($row1 = $result1->fetch_assoc())
+{
+    $rowcount = $rowcount + 1;
+}
+// echo $rowcount;
+
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -86,7 +98,7 @@ $username = $_SESSION['username'];
     </div>
     <div class="child-box">
     <table>
-    <tr><th style="background-color: #eeffcc; color:green;"><p>➜ Total User Created: </p></th><th><p>Click Here</p></th></tr>
+    <tr><th style="background-color: #eeffcc; color:green;"><p>➜ Total User Created: </p></th><th><p><?php echo $rowcount; ?></p></th></tr>
     <tr><th style="background-color: #eeffcc; color:green;"><p>➜ Total Tables Created: </p></th><th><p>Click Here</p></th></tr>
     <tr><th style="background-color: #eeffcc; color:green;"><p>➜ Total Mutual Funds Used: </p></th><th><p>Click Here</p></th></tr>
     <tr><th style="background-color: #eeffcc; color:green;"><p>➜ Currently logged in Users: </p></th><th><p>Click Here</p></th></tr>
@@ -106,9 +118,7 @@ $result = $conn->query($sql);
 ?>
 
 <body>
-
 <div class="table-container container">
-
 <table>
     <tr>
         <th>User ID</th>
@@ -145,9 +155,68 @@ $result = $conn->query($sql);
 $conn->close();
 ?>
 </table>
-
 </div>
+<br>
 
+<?php
+// Get unique table names
+include '../db_connect.php';    
+$sql = "SHOW TABLES";
+$result = mysqli_query($conn, $sql);
+?>
+<div class="table-container container">
+<table>
+    <tr>
+        <th>Table Name</th>
+        <th>Associated Username</th>
+        <th>User Full Name</th>
+        <th>User Email</th>
+        <th>Orphan Table</th>
+        <th>Action</th>
+    </tr>
+
+<?php
+    while ($row = mysqli_fetch_array($result)) {
+        $tablename_user = $row[0];
+        if ($tablename_user != 'users') {
+        	$stmt = $conn->prepare("SELECT * FROM users WHERE tablename = ?");
+        	$stmt->bind_param("s", $tablename_user);
+            $stmt->execute();
+        	$result2 = $stmt->get_result();
+        	while ($row2 = $result2->fetch_assoc()) {
+             $username_user = $row2['username'];
+             $fullname_user = $row2['fullname'];
+             $email_user = $row2['email'];
+        	}
+    	echo "<tr>";
+        echo "<td>".$row[0]."</td>";
+        echo "<td>".$username_user."</td>";
+        echo "<td>".$fullname_user."</td>";
+        echo "<td>".$email_user."</td>";
+        if ($username_user != '') {
+         echo "<td>".'No'."</td>";   
+        } else {
+         echo "<td>".'Yes'."</td>";  
+        }
+        $username_user = ''; $fullname_user = ''; $email_user = '';
+		?>
+    	<td>
+        <button class="btn btn-primary viewBtn3" data-toggle="modal" data-target="#Modal3"
+                data-id="<?= $tablename_user; ?>">
+            View Table
+        </button>
+        <button style="background-color:orange" class="btn btn-primary viewBtn4" data-toggle="modal" data-target="#Modal4"
+                data-id="<?= $tablename_user; ?>">
+            Delete Table
+        </button>
+        <?
+        echo "<tr>";
+        }
+}
+$conn->close();
+?>
+</table>
+</div>
     
 <!-- Modal -->
 <div class="modal fade" id="Modal1">
@@ -170,12 +239,43 @@ $conn->close();
     <div class="modal-dialog modal-lg">
         <div class="modal-content modal-overlay">
             <div class="modal-box modal-close-btn modal-header">  
-                <h5 class="modal-title">Delete User</h5>
                 <button class="btn-close"
                         data-bs-dismiss="modal">
                 </button>
             </div>
             <div class="modal-body" id="modalBody2">
+                Loading...
+            </div>
+        </div>
+    </div>
+</div>
+    
+<!-- Modal -->
+<div class="modal fade" id="Modal3">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content modal-overlay">
+            <div class="modal-box modal-close-btn modal-header">  
+                <button class="btn-close"
+                        data-bs-dismiss="modal">
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody3">
+                Loading...
+            </div>
+        </div>
+    </div>
+</div>
+    
+<!-- Modal -->
+<div class="modal fade" id="Modal4">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content modal-overlay">
+            <div class="modal-box modal-close-btn modal-header">  
+                <button class="btn-close"
+                        data-bs-dismiss="modal">
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody4">
                 Loading...
             </div>
         </div>
@@ -201,6 +301,30 @@ $(document).on("click",".viewBtn2",function(){
     var id=$(this).data("id");
     $("#modalBody2").html("Loading...");
     $("#modalBody2").load("delete_user.php?id="+id);
+    $("#Modal2").modal("show");
+
+});
+
+</script>
+<script>
+
+$(document).on("click",".viewBtn3",function(){
+
+    var id=$(this).data("id");
+    $("#modalBody2").html("Loading...");
+    $("#modalBody2").load("view_table.php?id="+id);
+    $("#Modal2").modal("show");
+
+});
+
+</script>
+<script>
+
+$(document).on("click",".viewBtn4",function(){
+
+    var id=$(this).data("id");
+    $("#modalBody2").html("Loading...");
+    $("#modalBody2").load("delete_table.php?id="+id);
     $("#Modal2").modal("show");
 
 });

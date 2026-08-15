@@ -3,6 +3,15 @@ session_start();
 
 if (isset($_SESSION['username'])) { header("Location: index.php"); exit; }
 if (isset($_SESSION['msg'])) { echo "<script> alert('" . addslashes($_SESSION['msg']) . "'); </script>"; unset($_SESSION['msg']); }
+
+// $dbout = include 'mftracker-v01/config/db.php';
+// 
+// if ($dbout == "Database_connection_failed.") {
+//     header("Location: mftracker-v01/installer/install.php");
+// } else {
+//     header("Location: mftracker-v01/installer/install.php");
+// }
+
 ?>
 
 <!DOCTYPE html>
