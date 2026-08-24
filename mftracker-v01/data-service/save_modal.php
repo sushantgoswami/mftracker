@@ -21,7 +21,28 @@ $currentnav = "0";
 	if ($row = $result->fetch_assoc()) {
     $isincode = $row["ISIN_Code"];
 	}
-
+	// parse NAV data
+	$filePath = "../cache/nav/{$isincode}.nav.txt";
+    	if (file_exists($filePath)) {
+			$lines = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+			foreach ($lines as $line) {
+    		if (strpos($line, $isincode) !== false) {
+        		$fields = str_getcsv($line, ';');
+        		$currentnav = $fields[4] ?? ''; // 6th field
+        		break;
+    		}
+			}
+   		} else {
+			$lines = file("../NAVAll.txt", FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+			foreach ($lines as $line) {
+    		if (strpos($line, $isincode) !== false) {
+        		$fields = str_getcsv($line, ';');
+        		$currentnav = $fields[4] ?? ''; // 6th field
+        		break;
+    		}
+			}
+		}   
+	// parse NAV data end
     $stmt = $conn->prepare("INSERT INTO `" . $_SESSION['tablename'] . "` (ISIN_Code, Fund_Name, Date, Current_NAV, Purchase_NAV, Units) VALUES (?, ?, ?, ?, ?, ?)");
     $stmt->bind_param("ssssss", $isincode, $fundname, $date, $currentnav, $purchasenav, $units);
 

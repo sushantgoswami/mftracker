@@ -22,7 +22,7 @@ foreach (file("../NAVAll.txt", FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as
 
     if (isset($fields[1], $fields[3])) {
         echo "<tr>";
-        echo "<td>".$fields[1]."</td>"; echo "<td>".$fields[3]."</td>";
+        echo "<td>".$fields[1]."</td>"; echo "<td>".$fields[3]."</td>"; echo "<td>".$fields[4]."</td>"; echo "<td>".$fields[5]."</td>";
         echo "<tr>";
     }
 }

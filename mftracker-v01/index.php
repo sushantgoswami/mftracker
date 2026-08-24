@@ -60,30 +60,12 @@ $gainloss_percent_total_value = ($gainloss_total_value / $purchase_total_value) 
     <table>
     <tr><th style="background-color: #eeffcc; color:green;"><p>➜ Current invested Value: </p></th><th><p><?php echo $current_total_value; ?></p></th></tr>
     <tr><th style="background-color: #eeffcc; color:green;"><p>➜ Total invested Value: </p></th><th><p><?php echo $purchase_total_value; ?></p></th></tr>
-    <tr><th style="background-color: #eeffcc; color:green;"><p>➜ Gain Loss Value: </p></th><p><?php $class = ($gainloss_total_value >= 0) ? "profit" : "loss"; echo "<td class='$class'>".$gainloss_total_value."</td>"; ?></p></tr>
+    <tr><th style="background-color: #eeffcc; color:green;"><p>➜ Gain Loss Value: </p></th><p><?php $class = ($gainloss_total_value >= 0) ? "profit" : "loss"; echo "<td class='$class'>".number_format($gainloss_total_value, 2)."</td>"; ?></p></tr>
     <tr><th style="background-color: #eeffcc; color:green;"><p>➜ Gain Loss Percent Value: </p></th><p><?php $class = ($gainloss_percent_total_value >= 0) ? "profit" : "loss"; echo "<td class='$class'>".number_format($gainloss_percent_total_value, 2)." %</td>"; ?></p></tr>
     </table>    
     <button type="button" onclick="window.location.reload();">Refresh Values</button>
     </div>
 </div>
-
-<?php
-
-$purchase_total_value = 0;
-$current_total_value = 0;
-
-// Get unique fund names
-$sql = "SELECT DISTINCT Fund_Name FROM `" . $_SESSION['tablename'] . "` ORDER BY Fund_Name";
-$result = $conn->query($sql);
-
-while ($row = $result->fetch_assoc()) {
-
-    $fund = $row['Fund_Name'];
-
-    // Query for each unique fund
-    $sql2 = "SELECT * FROM `" . $_SESSION['tablename'] . "` WHERE Fund_Name='$fund' ORDER BY Date";
-    $result2 = $conn->query($sql2);
-?>
 
 <!DOCTYPE html>
 <html>
@@ -152,6 +134,22 @@ while ($row = $result->fetch_assoc()) {
     </tr>
 
 <?php
+
+$purchase_total_value = 0;
+$current_total_value = 0;
+
+// Get unique fund names
+$sql = "SELECT DISTINCT Fund_Name FROM `" . $_SESSION['tablename'] . "` ORDER BY Fund_Name";
+$result = $conn->query($sql);
+
+while ($row = $result->fetch_assoc()) {
+
+    $fund = $row['Fund_Name'];
+
+    // Query for each unique fund
+    $sql2 = "SELECT * FROM `" . $_SESSION['tablename'] . "` WHERE Fund_Name='$fund' ORDER BY Date";
+    $result2 = $conn->query($sql2);
+
     $currentDate = date('d-m-Y');
     $current_initial_value = 0;
     $purchase_initial_value = 0;
@@ -171,12 +169,11 @@ while ($row = $result->fetch_assoc()) {
         $purchase_total_value = $purchase_total_value + $row2['Purchase_Value'];        
     }
     $percentage_value = ($gainloss_initial_value / $purchase_initial_value) * 100;
-    echo "<hr>";
     	echo "<tr>";
         echo "<td><strong>".$fundname."</strong></td>";
         echo "<td><b>".$isincode."</b></td>";
         echo "<td><b>".$currentDate."</b></td>";
-        echo "<td><b>".round($currentnav_initial_value, 2)."</b></td>";
+        echo "<td><b>".number_format($currentnav_initial_value, 2)."</b></td>";
         echo "<td><b>".round($units_initial_value, 2)."</b></td>";
         echo "<td><b>".round($purchase_initial_value, 2)."</b></td>";
         echo "<td><b>".round($current_initial_value, 2)."</b></td>";
@@ -198,17 +195,20 @@ while ($row = $result->fetch_assoc()) {
         <?
         echo "<tr>";
 }
+echo "<hr>";    
 $conn->close();
 ?>
+    
 </table>
-
 </div>
+    
 <?php 
 if ($purchase_total_value > 0) {
 $gainloss_total_value = $current_total_value - $purchase_total_value; 
 $gainloss_percent_total_value = ($gainloss_total_value / $purchase_total_value) * 100; }
 $_SESSION['purchase_total_value'] = $purchase_total_value;
 $_SESSION['current_total_value'] = $current_total_value;
+echo "<hr>";
 ?>
     
 <!-- Modal -->
@@ -231,7 +231,7 @@ $_SESSION['current_total_value'] = $current_total_value;
 <!-- Modal -->
 <div class="modal fade" id="Modal2">
     <div class="modal-dialog modal-lg">
-        <div class="modal-content modal-overlay">
+        <div class="modal-overlay modal-content">
             <div class="modal-box modal-close-btn modal-header">                
                 <button class="btn-close"
                         data-bs-dismiss="modal">

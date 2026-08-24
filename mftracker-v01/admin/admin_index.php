@@ -311,9 +311,9 @@ $(document).on("click",".viewBtn2",function(){
 $(document).on("click",".viewBtn3",function(){
 
     var id=$(this).data("id");
-    $("#modalBody2").html("Loading...");
-    $("#modalBody2").load("view_table.php?id="+id);
-    $("#Modal2").modal("show");
+    $("#modalBody3").html("Loading...");
+    $("#modalBody3").load("view_table.php?id="+id);
+    $("#Modal3").modal("show");
 
 });
 
@@ -323,9 +323,9 @@ $(document).on("click",".viewBtn3",function(){
 $(document).on("click",".viewBtn4",function(){
 
     var id=$(this).data("id");
-    $("#modalBody2").html("Loading...");
-    $("#modalBody2").load("delete_table.php?id="+id);
-    $("#Modal2").modal("show");
+    $("#modalBody4").html("Loading...");
+    $("#modalBody4").load("delete_table.php?id="+id);
+    $("#Modal4").modal("show");
 
 });
 

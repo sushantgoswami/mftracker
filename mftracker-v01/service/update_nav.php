@@ -85,8 +85,8 @@ while ($rowtable = $stmt1->fetch_array()) {
 	
 				$schemeCode = $fields[0];
 				$schemeName = $fields[3];
-				$nav        = $fields[4];
-				$date       = $fields[5];
+				$nav        = $fields[count($fields) - 2];
+				$date       = $fields[count($fields) - 1];
     	    
 				$stmt = $conn->prepare("UPDATE $tablenamex SET Current_NAV = ? WHERE ISIN_Code = ?");
 				$stmt->bind_param("ss", $nav, $isin);

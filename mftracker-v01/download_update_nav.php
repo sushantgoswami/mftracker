@@ -80,23 +80,17 @@ while ($row = $result->fetch_assoc()) {
     	// Compare both ISIN columns
     	if (strcasecmp(trim($fields[1]), $isin) == 0 ||
         strcasecmp(trim($fields[2]), $isin) == 0) {
-
+		file_put_contents("cache/nav/$isin.nav.txt", $line . PHP_EOL);
         $schemeCode = $fields[0];
         $schemeName = $fields[3];
-        $nav        = $fields[4];
-        $date       = $fields[5];
-
-        // echo "Scheme Code : $schemeCode<br>";
-        // echo "Scheme Name : $schemeName<br>";
-        // echo "ISIN        : $isin<br>";
-        // echo "NAV         : $nav<br>";
-        // echo "Date        : $date<br>";
+        $nav        = $fields[count($fields) - 2];
+        $date       = $fields[count($fields) - 1];
         
         $stmt = $conn->prepare("UPDATE `" . $_SESSION['tablename'] . "` SET Current_NAV = ? WHERE ISIN_Code = ?");
         $stmt->bind_param("ss", $nav, $isin);
 
         if ($stmt->execute()) {
-        echo "Data saved successfully. - $schemeCode $isin $nav<br>";
+        echo "Data saved successfully. - $schemeCode $isin $schemeName $nav $date<br>";
         } else {
         echo "Error: ";
         }
