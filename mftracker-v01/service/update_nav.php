@@ -91,11 +91,6 @@ while ($rowtable = $stmt1->fetch_array()) {
 				$stmt = $conn->prepare("UPDATE $tablenamex SET Current_NAV = ? WHERE ISIN_Code = ?");
 				$stmt->bind_param("ss", $nav, $isin);
 				$stmt->execute();
-				// if ($stmt->execute()) {
-				// echo "Data saved successfully. - $schemeCode $isin $nav<br>";
-				// } else {
-				// echo "Error: - $schemeCode $isin $nav<br>";
-				// }
 				}
 				}   
 			}

@@ -28,7 +28,7 @@ $currentnav = "0";
 			foreach ($lines as $line) {
     		if (strpos($line, $isincode) !== false) {
         		$fields = str_getcsv($line, ';');
-        		$currentnav = $fields[4] ?? ''; // 6th field
+        		$currentnav = $fields[count($fields) - 2];
         		break;
     		}
 			}
@@ -37,7 +37,7 @@ $currentnav = "0";
 			foreach ($lines as $line) {
     		if (strpos($line, $isincode) !== false) {
         		$fields = str_getcsv($line, ';');
-        		$currentnav = $fields[4] ?? ''; // 6th field
+        		$currentnav = $fields[count($fields) - 2];
         		break;
     		}
 			}

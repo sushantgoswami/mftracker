@@ -59,12 +59,8 @@ while ($row = $result->fetch_assoc()) {
     $sql2 = "SELECT * FROM `" . $_SESSION['tablename'] . "` WHERE ISIN_Code='$isincode'";
     $result2 = $conn->query($sql2);
 
-    // echo "<h3>$isincode</h3>";
-
     while ($row2 = $result2->fetch_assoc()) 
 	{
-        // echo "<td>".$row2['ISIN_Code']."</td>";
-        // bigin loop
      
     	$isin = $row2['ISIN_Code'];    // Replace with your ISIN
 		$lines = file("NAVAll.txt", FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
