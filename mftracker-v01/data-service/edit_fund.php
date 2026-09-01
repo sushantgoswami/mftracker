@@ -205,27 +205,27 @@ $conn->close();
     <form class="fancy-form" action="save_edit.php" method="post">
       <!-- Name Field -->
       <div class="input-group">
-        <input type="text" id="fundname" name="fundname" value="<? echo $fundname; ?>" disabled>
+        <input type="text" id="fundname" name="fundname" value="<?php echo $fundname; ?>" disabled>
         <label for="fundname">Fund Name</label>
       </div>
 
       <div class="input-group">
-        <input type="text" id="isincode" name="isincode" value="<? echo $isincode; ?>" disabled>
+        <input type="text" id="isincode" name="isincode" value="<?php echo $isincode; ?>" disabled>
         <label for="isincode">ISIN Code</label>
       </div>
         
       <div class="input-group">
-        <input type="text" id="date" name="date" value="<? echo $indiadate; ?>" disabled>
+        <input type="text" id="date" name="date" value="<?php echo $indiadate; ?>" disabled>
         <label for="date">Date</label>
       </div>
   
       <div class="input-group">
-        <input type="number" id="purchasenav" step=".00001" name="purchasenav" value="<? echo $purchasenav; ?>" required>
+        <input type="number" id="purchasenav" step=".00001" name="purchasenav" value="<?php echo $purchasenav; ?>" required>
         <label for="purchasenav">Purchase NAV</label>
       </div>    
         
       <div class="input-group">
-        <input type="number" id="units" step=".00001" name="units" value="<? echo $units; ?>" required>
+        <input type="number" id="units" step=".00001" name="units" value="<?php echo $units; ?>" required>
         <label for="units">Units</label>
       </div>
         

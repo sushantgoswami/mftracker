@@ -230,7 +230,7 @@ $stmt->close();
     <h2>Enter the Purchase data</h2>
     
     <div class="input-group">
-    <input type="text" id="fundname" name="fundname" value="<? echo $fundname; ?>" readonly>
+    <input type="text" id="fundname" name="fundname" value="<?php echo $fundname; ?>" readonly>
     <label for="fundname">Fund name</label>
     </div>
     

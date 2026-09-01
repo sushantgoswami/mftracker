@@ -254,7 +254,7 @@ $result = $conn->query($sql);
         
       <!-- Name Field -->
       <div class="input-group">
-        <input type="text" id="username" name="username" minlength="8" value="<? echo $username; ?>" disabled>
+        <input type="text" id="username" name="username" minlength="8" value="<?php echo $username; ?>" disabled>
         <label for="username">User ID</label>
       </div>
 
@@ -284,7 +284,7 @@ $result = $conn->query($sql);
       
       <div class="form-row">
       <div class="input-group"> 
-        <input type="text" id="Captcha" value="<? echo $Captcha; ?>" name="Captcha" disabled>
+        <input type="text" id="Captcha" value="<?php echo $Captcha; ?>" name="Captcha" disabled>
         <label for="Captcha">Captcha</label>
       </div>
       <div class="input-group"> 

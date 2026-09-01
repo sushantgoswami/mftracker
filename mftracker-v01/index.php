@@ -192,7 +192,7 @@ while ($row = $result->fetch_assoc()) {
             Add
         </button>
     	</td>
-        <?
+        <?php
         echo "<tr>";
 }
 echo "<hr>";    

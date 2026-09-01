@@ -251,7 +251,7 @@ $fullname = $_SESSION['fullname'];
     <form class="fancy-form" action="reset_password_check.php" method="post">
       <!-- Name Field -->
       <div class="input-group">
-        <input type="text" style="background-color:#00e600;" id="username" name="username" placeholder="<? echo $username ?>" minlength="8" disabled>
+        <input type="text" style="background-color:#00e600;" id="username" name="username" placeholder="<?php echo $username ?>" minlength="8" disabled>
       </div>        
         
       <!-- Password Field -->
@@ -274,7 +274,7 @@ $fullname = $_SESSION['fullname'];
       
       <div class="form-row">
       <div class="input-group"> 
-        <input type="text" id="Captcha" value="<? echo $Captcha;?>" name="Captcha" disabled>
+        <input type="text" id="Captcha" value="<?php echo $Captcha;?>" name="Captcha" disabled>
         <label for="Captcha">Captcha</label>
       </div>
       <div class="input-group"> 

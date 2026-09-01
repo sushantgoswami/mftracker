@@ -32,7 +32,7 @@ while ($row1 = $result1->fetch_assoc()) {
 </head>
 <body>
 
-<h2>Fund Name - <? echo $fund; ?></h2>
+<h2>Fund Name - <?php echo $fund; ?></h2>
 
 <table>
     <tr>

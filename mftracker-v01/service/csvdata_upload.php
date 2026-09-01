@@ -83,7 +83,7 @@ if (isset($_SESSION['msg'])) { echo "<script> alert('" . addslashes($_SESSION['m
 <body>
 <div>
 <form name=inputform action="csvdata_check.php" method="POST">
-  <h2>mftracker CSV data upload Form (user:<? echo $username; ?>)</h2><br>
+  <h2>mftracker CSV data upload Form (user:<?php echo $username; ?>)</h2><br>
                                 
   <label for="feedback"><p>Paste your details as below format, select your date format correctly. </p></label><br><br>
   <textarea class="fancy-textarea-glow" id="csvdata" name="csvdata" rows="30" cols="80" placeholder="INF174KA1EN7,KOTAK_FOCUSED_FUND_DIRECT,22/09/2023,19.766,50.589"></textarea>
