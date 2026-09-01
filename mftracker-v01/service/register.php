@@ -301,7 +301,7 @@ $_SESSION["Captcha"] = $Captcha;
       
       <div class="form-row">
       <div class="input-group"> 
-        <input type="text" id="Captcha" value="<? echo $Captcha;?>" name="Captcha" disabled>
+        <input type="text" id="Captcha" value="<?php echo $Captcha;?>" name="Captcha" disabled>
         <label for="Captcha">Captcha</label>
       </div>
       <div class="input-group"> 
