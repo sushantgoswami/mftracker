@@ -240,12 +240,12 @@ $stmt->close();
     <h2>Confirm Delete Table</h2>
     
     <div class="input-group">
-    <input type="text" id="userid" name="userid" value="<? echo $userid; ?>" readonly>
+    <input type="text" id="userid" name="userid" value="<?php echo $userid; ?>" readonly>
     <label for="userid">userid</label>
     </div>
     
     <div class="input-group">
-    <input type="text" id="tablename_user" name="tablename_user" value="<? echo $tablename_user; ?>" readonly>
+    <input type="text" id="tablename_user" name="tablename_user" value="<?php echo $tablename_user; ?>" readonly>
     <label for="tablename_user">tablename</label>
     </div>
     
@@ -257,7 +257,7 @@ $stmt->close();
     
     <div class="form-row">
     <div class="input-group"> 
-    <input type="text" id="Captcha" value="<? echo $Captcha;?>" name="Captcha" disabled>
+    <input type="text" id="Captcha" value="<?php echo $Captcha;?>" name="Captcha" disabled>
     <label for="Captcha">Captcha</label>
     </div>
     <div class="input-group"> 

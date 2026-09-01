@@ -254,7 +254,7 @@ $id_string = (string) $_GET['id'];
     <form class="fancy-form" action="reset_user_password_check.php" method="post">
       <!-- Name Field -->
       <div class="input-group">
-        <input type="text" style="background-color:#eeffcc; color:#4CAF50" id="username" name="username" value="<? echo $id_string; ?>" placeholder="<? echo $id_string; ?>" minlength="8" readonly>
+        <input type="text" style="background-color:#eeffcc; color:#4CAF50" id="username" name="username" value="<?php echo $id_string; ?>" placeholder="<?php echo $id_string; ?>" minlength="8" readonly>
       </div>        
         
       <!-- Password Field -->
@@ -277,7 +277,7 @@ $id_string = (string) $_GET['id'];
       
       <div class="form-row">
       <div class="input-group"> 
-        <input type="text" id="Captcha" value="<? echo $Captcha;?>" name="Captcha" disabled>
+        <input type="text" id="Captcha" value="<?php echo $Captcha;?>" name="Captcha" disabled>
         <label for="Captcha">Captcha</label>
       </div>
       <div class="input-group"> 
