@@ -141,11 +141,11 @@ $result = $conn->query($sql);
 		?>
     	<td>
         <button class="btn btn-primary viewBtn1" data-toggle="modal" data-target="#Modal1"
-                data-id="<?php= $username_user; ?>">
+                data-id="<?php echo $username_user; ?>">
             Reset Password
         </button>
         <button style="background-color:orange" class="btn btn-primary viewBtn2" data-toggle="modal" data-target="#Modal2"
-                data-id="<?php= $username_user; ?>">
+                data-id="<?php echo $username_user; ?>">
             Delete
         </button>
     	</td>
@@ -202,11 +202,11 @@ $result = mysqli_query($conn, $sql);
 		?>
     	<td>
         <button class="btn btn-primary viewBtn3" data-toggle="modal" data-target="#Modal3"
-                data-id="<?php= $tablename_user; ?>">
+                data-id="<?php echo $tablename_user; ?>">
             View Table
         </button>
         <button style="background-color:orange" class="btn btn-primary viewBtn4" data-toggle="modal" data-target="#Modal4"
-                data-id="<?php= $tablename_user; ?>">
+                data-id="<?php echo $tablename_user; ?>">
             Delete Table
         </button>
         <?php

@@ -40,34 +40,39 @@ $conn->close();
 session_start();  
 include '../db_connect.php';
 
-// 5. Construct the SQL query with backticks around the variable
+// 1. Construct the SQL query with backticks around the variable
 $sql = "CREATE TABLE `{$tablename}` (
-  `id` int(10) AUTO_INCREMENT PRIMARY KEY,
+  `id` int(10) NOT NULL,
   `Masterdata` int(2) NOT NULL DEFAULT 0,
   `Fund_Name` varchar(50) NOT NULL,
   `ISIN_Code` varchar(15) NOT NULL,
   `Date` date NOT NULL,
-  `Current_NAV` float NOT NULL,
-  `Purchase_NAV` float NOT NULL,
-  `Units` float NOT NULL,
-  `Current_Value` float(8,2) GENERATED ALWAYS AS (`Current_NAV` * `Units`) VIRTUAL,
-  `Purchase_Value` float(8,2) GENERATED ALWAYS AS (`Purchase_NAV` * `Units`) VIRTUAL,
-  `Gain_Loss` float(8,2) GENERATED ALWAYS AS (`Current_Value` - `Purchase_Value`) VIRTUAL,
-  `Percentage` float(8,2) GENERATED ALWAYS AS (`Gain_Loss` / `Purchase_Value` * 100) VIRTUAL
+  `Current_NAV` float(16,4) NOT NULL,
+  `Purchase_NAV` float(16,4) NOT NULL,
+  `Units` float(16,4) NOT NULL,
+  `Current_Value` float(11,2) GENERATED ALWAYS AS (`Current_NAV` * `Units`) VIRTUAL,
+  `Purchase_Value` float(11,2) GENERATED ALWAYS AS (`Purchase_NAV` * `Units`) VIRTUAL,
+  `Gain_Loss` float(11,2) GENERATED ALWAYS AS (`Current_Value` - `Purchase_Value`) VIRTUAL,
+  `Percentage` float(11,2) GENERATED ALWAYS AS (`Gain_Loss` / `Purchase_Value` * 100) VIRTUAL
 )";
-
-// 6. Prepare and execute the query using the statement object
 $stmt1 = $conn->prepare($sql);
-
-if ($stmt1->execute()) {
+$stmt1->execute();
+$stmt1->close();
+// 2. Part 2 
+$sql = "ALTER TABLE `{$tablename}` ADD PRIMARY KEY (`id`)";
+$stmt1 = $conn->prepare($sql);
+$stmt1->execute();
+$stmt1->close();
+// 3. Part 3
+$sql = "ALTER TABLE `{$tablename}` MODIFY `id` int(10) NOT NULL AUTO_INCREMENT";
+$stmt1 = $conn->prepare($sql);
+  if ($stmt1->execute()) {
     $_SESSION['msg'] = "Registration Successful, Data Table Creation Successful";
 } else {
     $_SESSION['msg'] = "Registration Successful, Data Table Creation is not Successful";
 }
-
-// 7. Close connections
-$conn->close();
 $stmt1->close();
+$conn->close();
 header("Location: ../../index.php");
 exit;
 ?>

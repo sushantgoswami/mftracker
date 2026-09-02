@@ -207,7 +207,7 @@ if (isset($_SESSION['msg'])) { echo "<script> alert('" . addslashes($_SESSION['m
       <!-- Submit Button -->
       <button type="submit" class="submit-btn" value="Login">Submit</button>
        
-      <p> ➜➜➜ <a href="mftracker-v01/service/register.php">New user Registration</a> ➜➜➜ <a href="mftracker-v01/service/forgot_password.php">Forgot Password</a></p>
+      <p> ➜➜➜ <a style="color:#cbd5e1;" href="mftracker-v01/service/register.php">New user Registration</a> ➜➜➜ <a style="color:#cbd5e1;" href="mftracker-v01/service/forgot_password.php">Forgot Password</a></p>
 
     </form>
   </div>

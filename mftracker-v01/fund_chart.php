@@ -5,21 +5,19 @@ if (!isset($_SESSION['username'])) {header("Location: ../../login.php"); exit;}
 
 $data = [];
 $username_user = $_SESSION['username'];
-$filename = "../cache/totalvalue/$username_user.csv";
+$filename = "cache/totalvalue/$username_user.csv";
 
 $data = [];
 
 if (($handle = fopen($filename, "r")) !== false) {
 
-    // Skip header row
-    // fgetcsv($handle);
-
     while (($row = fgetcsv($handle)) !== false) {
 
         $data[] = [
             "date" => $row[0],
-            "purchase" => (float)$row[1],
-            "current" => (float)$row[2]
+            "purchase" => (int)$row[1],
+            "current" => (int)$row[2],
+            "gainloss" => (int)$row[3]
         ];
     }
 
@@ -32,29 +30,27 @@ if (($handle = fopen($filename, "r")) !== false) {
 <head>
     <title>CSV Chart</title>
 
-    <script src="js/chart.js"></script>
+    <script src="charts/js/chart.js"></script>
 </head>
 
 <body>
 
 <h2>Gain Loss Chart</h2>
 
-<div style="width: 400px; height: 250px;">
 <canvas id="myChart"></canvas>
-</div>
+<canvas id="myChart1"></canvas>
 
 <script>
-
 const data = <?= json_encode($data) ?>;
-
 const labels = data.map(row => row.date);
 const purchase = data.map(row => row.purchase);
 const current = data.map(row => row.current);
-
+const gainloss = data.map(row => row.gainloss);
 const ctx = document.getElementById('myChart');
+const ctx1 = document.getElementById('myChart1');
 
 new Chart(ctx, {
-    type: 'bar',
+    type: 'line',
 
     data: {
         labels: labels,
@@ -83,7 +79,31 @@ new Chart(ctx, {
         }
     }
 });
+new Chart(ctx1, {
+    type: 'line',
 
+    data: {
+        labels: labels,
+
+        datasets: [
+            {
+                label: 'Gainloss Value',
+                data: gainloss,
+                backgroundColor: 'blue'
+            }
+        ]
+    },
+
+    options: {
+        responsive: true,
+
+        scales: {
+            y: {
+                beginAtZero: false
+            }
+        }
+    }
+});
 </script>
 
 </body>

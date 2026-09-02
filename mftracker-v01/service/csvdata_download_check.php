@@ -47,7 +47,7 @@ if ($fundname == 'allfunds') {
         echo "<td>".$row['Purchase_NAV']."</td>"; echo ",";
         echo "<td>".$row['Units']."</td>";
         echo "</tr>";
-        ?><br><?
+        ?><br><?php
  }
  $stmt->close();
 }
@@ -65,7 +65,7 @@ if ($fundname != 'allfunds') {
         echo "<td>".$row['Purchase_NAV']."</td>"; echo ",";
         echo "<td>".$row['Units']."</td>";
         echo "</tr>";
-        ?><br><?
+        ?><br><?php
  }  
  $stmt->close();
 }

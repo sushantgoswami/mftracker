@@ -12,10 +12,6 @@ $username = $_SESSION['username'];
 $purchase_total_value = 0;
 $current_total_value = 0;
     
-// $stmt = $conn->prepare("SELECT * FROM `" . $_SESSION['tablename'] . "`);
-// $stmt->execute();
-// $result = $stmt->get_result();
-
 $sql = "SELECT * FROM `" . $_SESSION['tablename'] . "`";
 $result = $conn->query($sql);
  
