@@ -15,8 +15,13 @@
 session_start();
 include 'db_connect.php';
 
-$filename = 'NAVAll.txt';
-
+$filename = 'cache/amfinav/NAVAll.txt';
+$context = stream_context_create([
+    'ssl' => [
+        'verify_peer'      => false,
+        'verify_peer_name' => false,
+    ]
+]);
 // Check if file exists to prevent errors
 if (file_exists($filename)) {
     // Get file modification time and current time
@@ -30,8 +35,8 @@ if (file_exists($filename)) {
     } else {
         echo "The file is older than 1 hour. Proceeding to download.. <br>";
 		$url = "https://portal.amfiindia.com/spages/NAVAll.txt";
-		$savePath = "NAVAll.txt";
-		$remoteFile = fopen($url, 'r');
+		$savePath = "cache/amfinav/NAVAll.txt";
+		$remoteFile = fopen($url, 'r', false, $context);
 		if ($remoteFile) {
     		$result = file_put_contents($savePath, $remoteFile);    
     	if ($result !== false) {
@@ -44,7 +49,18 @@ if (file_exists($filename)) {
 } 
     }
 } else {
-    echo "File does not exist.";
+    echo "File does not exist ...";
+    $url = "https://portal.amfiindia.com/spages/NAVAll.txt";
+    $savePath = "cache/amfinav/NAVAll.txt";
+    $remoteFile = fopen($url, 'r', false, $context);
+    if ($remoteFile) {
+    $result = file_put_contents($savePath, $remoteFile);
+    if ($result !== false) {
+        echo "File downloaded successfully!<br>";
+    } else {
+        echo "Failed to save the file.<br>";
+    }
+    }
 }
 
 // Get unique fund names
@@ -63,7 +79,7 @@ while ($row = $result->fetch_assoc()) {
 	{
      
     	$isin = $row2['ISIN_Code'];    // Replace with your ISIN
-		$lines = file("NAVAll.txt", FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+		$lines = file("cache/amfinav/NAVAll.txt", FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 		foreach ($lines as $line) {
 
     	$fields = explode(";", $line);
@@ -76,8 +92,9 @@ while ($row = $result->fetch_assoc()) {
     	// Compare both ISIN columns
     	if (strcasecmp(trim($fields[1]), $isin) == 0 ||
         strcasecmp(trim($fields[2]), $isin) == 0) {
-		file_put_contents("cache/nav/$isin.nav.txt", $line . PHP_EOL);
-        $schemeCode = $fields[0];
+	file_put_contents("cache/nav/$isin.nav.txt", $line . PHP_EOL);
+        
+	$schemeCode = $fields[0];
         $schemeName = $fields[3];
         $nav        = $fields[count($fields) - 2];
         $date       = $fields[count($fields) - 1];

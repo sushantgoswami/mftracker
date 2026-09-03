@@ -7,9 +7,14 @@ session_start();
 include '../db_connect.php';
 include '../config/encrypt_code.php';
 
-$filename = '../NAVAll.txt';
+$filename = '../cache/amfinav/NAVAll.txt';
 $id = (string)$_GET['id'];
-
+$context = stream_context_create([
+    'ssl' => [
+        'verify_peer'      => false,
+        'verify_peer_name' => false,
+    ]
+]);
 if ($id == $encryptedcode) {
 // main code start
 // Check if file exists to prevent errors
@@ -25,8 +30,8 @@ if (file_exists($filename)) {
     } else {
         echo "The file is older than 1 hour. Proceeding to download.. <br>";
 		$url = "https://portal.amfiindia.com/spages/NAVAll.txt";
-		$savePath = "../NAVAll.txt";
-		$remoteFile = fopen($url, 'r');
+		$savePath = "../cache/amfinav/NAVAll.txt";
+		$remoteFile = fopen($url, 'r', false, $context);
 		if ($remoteFile) {
     		$result = file_put_contents($savePath, $remoteFile);    
     	if ($result !== false) {
@@ -40,6 +45,17 @@ if (file_exists($filename)) {
     }
 } else {
     echo "File does not exist.";
+    $url = "https://portal.amfiindia.com/spages/NAVAll.txt";
+    $savePath = "../cache/amfinav/NAVAll.txt";
+    $remoteFile = fopen($url, 'r', false, $context);
+    if ($remoteFile) {
+    $result = file_put_contents($savePath, $remoteFile);
+    if ($result !== false) {
+        echo "File downloaded successfully!<br>";
+    } else {
+        echo "Failed to save the file.<br>";
+    }
+    }
 }
 
 // Get unique fund names
@@ -68,7 +84,7 @@ while ($rowtable = $stmt1->fetch_array()) {
     	    // bigin loop
     	 
     		$isin = $row2['ISIN_Code'];    // Replace with your ISIN
-			$lines = file("../NAVAll.txt", FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+			$lines = file("../cache/amfinav/NAVAll.txt", FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 			foreach ($lines as $line) 
 				{
 	
@@ -100,6 +116,59 @@ while ($rowtable = $stmt1->fetch_array()) {
     
 
 $stmt->close();
+
+// graph data update
+$administrator = "administrator";
+
+$stmt = $conn->prepare("SELECT * FROM users WHERE username != ?");
+$stmt->bind_param("s", $administrator);
+$stmt->execute();
+$result = $stmt->get_result();
+
+while ($row = $result->fetch_assoc()) {
+  $tablename_user = $row['tablename'];
+  $username_user = $row['username'];
+  // echo $username_user;
+  // echo $tablename_user;
+  //
+  $purchase_total_value = 0;
+  $current_total_value = 0;
+
+  $sql = "SELECT * FROM `" . $tablename_user . "`";
+  $result1 = $conn->query($sql);
+
+  $current_initial_value = 0;
+  $purchase_initial_value = 0;
+  $units_initial_value = 0;
+  $gainloss_initial_value = 0;
+  $currentnav_initial_value = 0;
+
+  while ($row1 = $result1->fetch_assoc())
+        {
+    $current_initial_value = $current_initial_value + $row1['Current_Value'];
+    $purchase_initial_value = $purchase_initial_value + $row1['Purchase_Value'];
+  }
+  $current_total_value = intval($current_initial_value);
+  $purchase_total_value = intval($purchase_initial_value);
+  $gainloss = intval($current_total_value - $purchase_total_value);
+  // echo $current_initial_value;
+  // echo $purchase_initial_value;
+  $currentdate = date('d-m-y');
+  $filename = "../cache/totalvalue/$username_user.csv";
+  $today = date("Y-m-d");
+  $fileDate = date("Y-m-d", filemtime($filename));
+  if ($fileDate == $today) {
+   echo "Not appending data";
+  } else {
+   $file = fopen($filename, 'a');
+   $data = array($currentdate, $purchase_total_value, $current_total_value, $gainloss);
+   fputcsv($file, $data);
+   fclose($file);
+  }
+}
+$stmt->close();
+// end graph data update
+
 $conn->close();
 
 // Clear and readable log message format

@@ -29,16 +29,16 @@ if (($handle = fopen($filename, "r")) !== false) {
 <html>
 <head>
     <title>CSV Chart</title>
-
     <script src="charts/js/chart.js"></script>
+    <link rel="stylesheet" href="css/style5.css">
 </head>
 
 <body>
 
 <h2>Gain Loss Chart</h2>
 
-<canvas id="myChart"></canvas>
-<canvas id="myChart1"></canvas>
+<canvas id="myChart" style="background-color: #fff3cd"></canvas>
+<canvas id="myChart1" style="background-color: #b6e1ea"></canvas>
 
 <script>
 const data = <?= json_encode($data) ?>;

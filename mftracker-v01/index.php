@@ -260,7 +260,7 @@ echo "<hr>";
 <!-- Modal -->
 <div class="modal fade" id="Modal3">
     <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+        <div class="modal-content" style="background-color: #ffffff">
             <div class="modal-header">
                 <button class="btn-close"
                         data-bs-dismiss="modal">
