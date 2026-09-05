@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <head>
     <link href="bootstrap/bootstrap.min.css" rel="stylesheet">
+    <script src="charts/js/chart.js"></script>
     <script src="bootstrap/jquery-3.7.1.min.js"></script>
     <script src="bootstrap/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="css/style5.css">
@@ -33,13 +34,10 @@ if (!isset($_SESSION['username'])) {
 }
 if (isset($_SESSION['msg'])) { echo "<script> alert('" . addslashes($_SESSION['msg']) . "'); </script>"; unset($_SESSION['msg']); }
 
-// require_once 'service/update_nav_file.php';
-
 include 'db_connect.php';
 
 $username = $_SESSION['username'];
 $fullname = $_SESSION['fullname'];
-// $fullname = $_SESSION['fullname'];
 $gainloss_total_value = 0;
 $gainloss_percent_total_value = 0;
 $purchase_total_value = $_SESSION['purchase_total_value'];
@@ -49,7 +47,12 @@ $gainloss_total_value = $current_total_value - $purchase_total_value;
 $gainloss_percent_total_value = ($gainloss_total_value / $purchase_total_value) * 100; }
 ?>
 <head>
-<h2>Mutual Fund Details - <?php echo $fullname; ?></h2>
+ <br>
+ <div class="menu parent-container-div">
+  <div class="child-box">
+   <h4><div>Mutual Fund Details - <?php echo $fullname; ?></div></h4>
+  </div>
+ </div>
 </head>
 <div class="menu parent-container-div">
     <div class="child-box">
@@ -303,7 +306,7 @@ $(document).on("click",".viewBtn3",function(){
 
     var id=$(this).data("id");
     $("#modalBody3").html("Loading...");
-    $("#modalBody3").load("fund_chart.php?id="+id);
+    $("#modalBody3").load("charts/fund_chart3.php?id="+id);
     $("#Modal3").modal("show");
 
 });
@@ -314,6 +317,8 @@ document.getElementById('Modal3').addEventListener('hidden.bs.modal', function (
     location.reload();
 });
 </script>
+
+<?php include 'charts/fund_chart4.php'; ?>
 
 </body>
 </html>

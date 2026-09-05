@@ -40,6 +40,10 @@ while ($row = $result->fetch_assoc()) {
   $current_total_value = intval($current_initial_value);
   $purchase_total_value = intval($purchase_initial_value);
   $gainloss = intval($current_total_value - $purchase_total_value);
+  if ($gainloss != 0) {
+  $gainlosspercent = ($gainloss / $purchase_total_value) * 100;
+  $gainlosspercent = round($gainlosspercent, 2); }
+  // echo $gainlosspercent;
   // echo $current_initial_value;
   // echo $purchase_initial_value;
   $currentdate = date('d-m-y');
@@ -50,7 +54,7 @@ while ($row = $result->fetch_assoc()) {
    echo "Not appending data";
   } else {
    $file = fopen($filename, 'a');
-   $data = array($currentdate, $purchase_total_value, $current_total_value, $gainloss);
+   $data = array($currentdate, $purchase_total_value, $current_total_value, $gainloss, $gainlosspercent);
    fputcsv($file, $data);
    fclose($file);
   }

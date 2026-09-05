@@ -114,10 +114,34 @@ while ($rowtable = $stmt1->fetch_array()) {
         // main code end
 }
     
+// Clear and readable log message format
+$logFolder = "../log/";
+$logFile = "update_nav.log";
+$logMessage = "[" . date("d-m-Y H:i:s") . "] " . basename($_SERVER['PHP_SELF']) . " (MSG:0001): file executed successfully." . PHP_EOL;
+$_SESSION['logMessage'] = $logMessage;
+$_SESSION['logFile'] = "$logFolder$logFile";
+include '../log/logger.php';
+unset($_SESSION['logMessage']);
+unset($_SESSION['logFile']);
+// Clear and readable log message format
 
 $stmt->close();
+$stmt1->close();
+    
+// sleep(1);
+} 
+// main code end
+?>
 
-// graph data update
+<?php
+
+include '../db_connect.php';
+include '../config/encrypt_code.php';
+
+$id = (string)$_GET['id'];
+
+if ($id == $encryptedcode) {
+
 $administrator = "administrator";
 
 $stmt = $conn->prepare("SELECT * FROM users WHERE username != ?");
@@ -151,6 +175,10 @@ while ($row = $result->fetch_assoc()) {
   $current_total_value = intval($current_initial_value);
   $purchase_total_value = intval($purchase_initial_value);
   $gainloss = intval($current_total_value - $purchase_total_value);
+  if ($gainloss != 0) {
+  $gainlosspercent = ($gainloss / $purchase_total_value) * 100;
+  $gainlosspercent = round($gainlosspercent, 2); }
+  // echo $gainlosspercent;
   // echo $current_initial_value;
   // echo $purchase_initial_value;
   $currentdate = date('d-m-y');
@@ -161,30 +189,15 @@ while ($row = $result->fetch_assoc()) {
    echo "Not appending data";
   } else {
    $file = fopen($filename, 'a');
-   $data = array($currentdate, $purchase_total_value, $current_total_value, $gainloss);
+   $data = array($currentdate, $purchase_total_value, $current_total_value, $gainloss, $gainlosspercent);
    fputcsv($file, $data);
    fclose($file);
   }
 }
 $stmt->close();
-// end graph data update
-
 $conn->close();
+}
 
-// Clear and readable log message format
-$logFolder = "../log/";
-$logFile = "update_nav.log";
-$logMessage = "[" . date("d-m-Y H:i:s") . "] " . basename($_SERVER['PHP_SELF']) . " (MSG:0001): file executed successfully." . PHP_EOL;
-$_SESSION['logMessage'] = $logMessage;
-$_SESSION['logFile'] = "$logFolder$logFile";
-include '../log/logger.php';
-unset($_SESSION['logMessage']);
-unset($_SESSION['logFile']);
-// Clear and readable log message format
-    
-sleep(1);
-} 
-// main code end
 ?>
 </body>
 </html>

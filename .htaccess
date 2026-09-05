@@ -68,3 +68,9 @@ RewriteRule ^(.*)$ sitepro/$1 [L,QSA]
     Order Deny,Allow
     Deny from all
 </Files>
+<FilesMatch "\.(txt|csv)$">
+    Order Deny,Allow
+    Deny from all
+    # Require all denied
+</FilesMatch>
+
