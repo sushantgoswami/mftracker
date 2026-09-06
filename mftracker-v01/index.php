@@ -76,9 +76,6 @@ $gainloss_percent_total_value = ($gainloss_total_value / $purchase_total_value) 
     <tr><th style="background-color: #eeffcc; color:green;"><p>➜ Gain Loss Percent Value: </p></th><p><?php $class = ($gainloss_percent_total_value >= 0) ? "profit" : "loss"; echo "<td class='$class'>".number_format($gainloss_percent_total_value, 2)." %</td>"; ?></p></tr>
     </table>
     <h6> </h6>    
-    <button class="btn btn-primary viewBtn3" data-toggle="modal" data-target="#Modal3" data-id="3M">3M</button>
-    <button class="btn btn-primary viewBtn3" data-toggle="modal" data-target="#Modal3" data-id="6M">6M</button>
-    <button class="btn btn-primary viewBtn3" data-toggle="modal" data-target="#Modal3" data-id="1Y">1Y</button>
     <button type="button" onclick="window.location.reload();">Refresh Values</button>
     </div>
 </div>
@@ -260,22 +257,6 @@ echo "<hr>";
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="Modal3">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content" style="background-color: #ffffff">
-            <div class="modal-header">
-                <button class="btn-close"
-                        data-bs-dismiss="modal">
-                </button>
-            </div>
-            <div class="modal-body" id="modalBody3">
-                Loading...
-            </div>
-        </div>
-    </div>
-</div>    
-
 <script>
 
 $(document).on("click",".viewBtn1",function(){
@@ -299,23 +280,6 @@ $(document).on("click",".viewBtn2",function(){
 
 });
 
-</script>
-<script>
-
-$(document).on("click",".viewBtn3",function(){
-
-    var id=$(this).data("id");
-    $("#modalBody3").html("Loading...");
-    $("#modalBody3").load("charts/fund_chart3.php?id="+id);
-    $("#Modal3").modal("show");
-
-});
-
-</script>
-<script>
-document.getElementById('Modal3').addEventListener('hidden.bs.modal', function () {
-    location.reload();
-});
 </script>
 
 <?php include 'charts/fund_chart4.php'; ?>

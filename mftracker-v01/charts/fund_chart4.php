@@ -36,6 +36,12 @@ if (($handle = fopen($filename, "r")) !== false) {
 /*
  * Calculate summary values
  */
+/*
+ * Get only the last 30 CSV records
+ */
+if (count($data) > 30) {
+    $data = array_slice($data, -30);
+}
 
 $latestPurchase = 0;
 $latestCurrent = 0;
@@ -595,7 +601,7 @@ const zeroLinePlugin = {id: "zeroLine", afterDraw(chart) {
 };
 
 new Chart(ctx2, {
-    type: 'bar',
+    type: 'line',
 
     data: {
         labels: labels,
@@ -731,7 +737,7 @@ const canvas3 = document.getElementById("myChart3");
 const ctx3 = canvas3.getContext("2d");
 
 new Chart(ctx3, {
-    type: 'bar',
+    type: 'line',
 
     data: {
         labels: labels,
