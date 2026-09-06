@@ -12,6 +12,28 @@ $units = $_SESSION['units'];
 $isincode = $_SESSION['isincode'];
 $currentnav = "0";
 
+        // parse NAV data
+        $filePath = "../cache/nav/{$isincode}.nav.txt";
+        $currentnav = null;
+        if (file_exists($filePath)) {
+                        $lines = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+                        if (!empty($lines)) {
+                        $lastLine = end($lines);
+                        $fields = str_getcsv($lastLine, ';');
+                        $currentnav = $fields[count($fields) - 2];
+                        }
+        } else {
+                        $lines = file("../cache/amfinav/NAVAll.txt", FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+                        foreach ($lines as $line) {
+                        if (strpos($line, $isincode) !== false) {
+                        $fields = str_getcsv($line, ';');
+                        $currentnav = $fields[count($fields) - 2];
+                        break;
+                        }
+                        }
+        }
+        // parse NAV data end
+
 	$stmt = $conn->prepare("SELECT ISIN_Code FROM `" . $_SESSION['tablename'] . "` WHERE Fund_Name = ?");
 	$stmt->bind_param("s", $fundname);
 	$stmt->execute();

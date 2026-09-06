@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/style5.css">
     <link rel="icon" type="image/x-icon" href="icons/golden-indian-rupee.ico">
     <style>
-    .parent-container-div {
+    	.parent-container-div {
 	  display: flex;         /* Activates flexbox alignment */
 	  gap: 20px;             /* Controls the exact space between the boxes */
 	}
@@ -23,9 +23,82 @@
     	border: 0px solid #ccc; /* Optional border for the box visual */
     	padding: 0px;
     	}
+        .titlebar {
+            height: 55px;
+            background: #1f2937;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .logout {
+            background: #dc2626;
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .logout:hover {
+            background: #b91c1c;
+        }
+    	body {
+      	background-color: #e6e6ff;
+    	}
+    	.table-container {
+    	width: 100%;
+    	overflow-x: auto; /* Adds horizontal scrollbar if table overflows */
+    	border: 0px solid #ccc; /* Optional border for the box visual */
+    	padding: 0px;
+    	}
+        /* Dark semi-transparent background over the whole screen */
+        .modal-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.4); /* 50% transparent black */
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 1000;
+        }
+        /* White semi-transparent container box */
+        .modal-box {
+          background-color: rgba(255, 255, 255, 0.95); /* 85% transparent white */
+          padding: 20px;
+          border-radius: 8px;
+          color: #333333; /* Text remains 100% solid */
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+    	.modal-close-btn {
+    	/* Button container sizing */
+          width: 40px;
+      	height: 40px;
+      	padding: 10px;
+      	background-color: orange;
+    	}
+	.user-area {
+    	display: flex;
+    	align-items: right;
+    	gap: 15px;
+	}
+	.username {
+    	font-size: 16px;
+    	color: #e5e7eb;
+	}
     </style>
 </head>
-    
 <?php
 session_start();
 if (!isset($_SESSION['username'])) {
@@ -46,14 +119,18 @@ if ($purchase_total_value > 0) {
 $gainloss_total_value = $current_total_value - $purchase_total_value;
 $gainloss_percent_total_value = ($gainloss_total_value / $purchase_total_value) * 100; }
 ?>
-<head>
- <br>
- <div class="menu parent-container-div">
-  <div class="child-box">
-   <h4><div>Mutual Fund Details - <?php echo $fullname; ?></div></h4>
-  </div>
- </div>
-</head>
+<body>
+    <div class="titlebar">
+        <div class="title">My Dashboard</div>
+         <div class="user-area">
+          <span class="username">
+                <?php echo htmlspecialchars($_SESSION['fullname']); ?>
+          </span>
+         </div>
+       <a href="../logout.php" class="logout" onclick="return confirm('Are you sure you want to logout?');">Logout</a>
+    </div>
+   <br>
+
 <div class="menu parent-container-div">
     <div class="child-box">
     <p>➜ Enter Recent Purchases <a href="data-service/data_entry.php">Click Here</a></p>
@@ -79,56 +156,6 @@ $gainloss_percent_total_value = ($gainloss_total_value / $purchase_total_value) 
     <button type="button" onclick="window.location.reload();">Refresh Values</button>
     </div>
 </div>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>mftracker</title>
-    <link href="bootstrap/bootstrap.min.css" rel="stylesheet">
-    <script src="bootstrap/jquery-3.7.1.min.js"></script>
-    <script src="bootstrap/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="css/style5.css">
-    <style>
-    body {
-      background-color: #e6e6ff;
-    }
-    .table-container {
-    width: 100%;
-    overflow-x: auto; /* Adds horizontal scrollbar if table overflows */
-    border: 0px solid #ccc; /* Optional border for the box visual */
-    padding: 0px;
-    }
-	/* Dark semi-transparent background over the whole screen */
-	.modal-overlay {
-	  position: fixed;
-	  top: 0;
-	  left: 0;
-	  width: 100%;
-	  height: 100%;
-	  background-color: rgba(0, 0, 0, 0.4); /* 50% transparent black */
-	  display: flex;
-	  justify-content: center;
-	  align-items: center;
-	  z-index: 1000;
-	}	
-	/* White semi-transparent container box */
-	.modal-box {
-	  background-color: rgba(255, 255, 255, 0.95); /* 85% transparent white */
-	  padding: 20px;
-	  border-radius: 8px;
-	  color: #333333; /* Text remains 100% solid */
-	  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-	}
-    .modal-close-btn {
-    /* Button container sizing */
-	  width: 40px;
-      height: 40px;
-      padding: 10px;
-      background-color: orange;
-    }
-    </style>
-</head>
-<body>
 
 <div class="container table-container">
 

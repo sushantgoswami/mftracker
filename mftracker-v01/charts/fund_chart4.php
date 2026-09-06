@@ -612,9 +612,10 @@ new Chart(ctx2, {
                     "Gain / Loss",
                 data:
                     gainloss,
+		backgroundColor: purchaseGradient,
                 borderWidth: 3,
                 tension: .42,
-                fill: false,
+                fill: true,
                 pointRadius: 3,
                 pointHoverRadius: 8,
                 pointBackgroundColor:
@@ -748,9 +749,10 @@ new Chart(ctx3, {
                     "Gain / Loss Percent",
                 data:
                     gainlosspercent,
+		backgroundColor: currentGradient,
                 borderWidth: 3,
                 tension: .42,
-                fill: false,
+                fill: true,
                 pointRadius: 3,
                 pointHoverRadius: 8,
                 pointBackgroundColor: "#ffffff",

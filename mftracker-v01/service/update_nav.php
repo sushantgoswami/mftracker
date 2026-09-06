@@ -98,7 +98,7 @@ while ($rowtable = $stmt1->fetch_array()) {
 				// Compare both ISIN columns
 				if (strcasecmp(trim($fields[1]), $isin) == 0 ||
 				strcasecmp(trim($fields[2]), $isin) == 0) {
-                                file_put_contents("../cache/nav/$isin.nav.txt", $line . PHP_EOL);
+                                file_put_contents("../cache/nav/$isin.nav.txt", $line . PHP_EOL, FILE_APPEND);
 	
 				$schemeCode = $fields[0];
 				$schemeName = $fields[3];
