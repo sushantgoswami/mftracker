@@ -137,7 +137,7 @@ $gainClass =
             </div>
             <!-- PERIOD BUTTONS -->
              <div class="period-buttons">
-             <button type="button" class="period-btn active" data-period="all">ALL</button>
+             <button type="button" class="period-btn active" data-period="1M">1M</button>
              <button type="button" class="period-btn" data-period="3m">3M</button>
              <button type="button" class="period-btn" data-period="6m">6M</button>
              <button type="button" class="period-btn" data-period="1y">1Y</button>
@@ -576,6 +576,10 @@ new Chart(ctx1, {
 
 const canvas2 = document.getElementById("myChart2");
 const ctx2 = canvas2.getContext("2d");
+/* gainloss gradient */
+const gainlossGradient = ctx2.createLinearGradient(0,0,0,310);
+gainlossGradient.addColorStop(0,"rgba(33,150,243,.30)");
+gainlossGradient.addColorStop(1,"rgba(33,150,243,.01)");
 /* Zero line plugin */
 const zeroLinePlugin = {id: "zeroLine", afterDraw(chart) {
         const yScale = chart.scales.y;
@@ -612,14 +616,13 @@ new Chart(ctx2, {
                     "Gain / Loss",
                 data:
                     gainloss,
-		backgroundColor: purchaseGradient,
+		backgroundColor: gainlossGradient,
                 borderWidth: 3,
                 tension: .42,
                 fill: true,
                 pointRadius: 3,
                 pointHoverRadius: 8,
-                pointBackgroundColor:
-                    "#ffffff",
+                pointBackgroundColor: "#ffffff",
                 pointBorderWidth: 2,
                 segment: {
                     borderColor:

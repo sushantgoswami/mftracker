@@ -5734,18 +5734,18 @@ Axis Mutual Fund
 120472;INF846K01DQ6;INF846K01DR4;Axis Gold Fund;Direct Plan;IDCW Option;48.5112;04-Sep-2026
 115897;INF846K01AL3;-;Axis Gold Fund;Regular Plan;Growth Option;44.4203;04-Sep-2026
 115898;INF846K01AM1;INF846K01AN9;Axis Gold Fund;Regular Plan;IDCW Option;44.4757;04-Sep-2026
-147895;INF846K01U25;INF846K01U17;Axis Income Plus Arbitrage Omni FOF;Direct Plan;Annual IDCW Option;14.2402;03-Sep-2026
-147889;INF846K01U09;-;Axis Income Plus Arbitrage Omni FOF;Direct Plan;Growth Option;15.7228;03-Sep-2026
-147894;INF846K01U74;INF846K01U82;Axis Income Plus Arbitrage Omni FOF;Direct Plan;Half Yearly Dividend Option;11.7242;03-Sep-2026
-147891;INF846K01U90;INF846K01V08;Axis Income Plus Arbitrage Omni FOF;Direct Plan;IDCW Option;15.7360;03-Sep-2026
-147892;INF846K01U41;INF846K01U33;Axis Income Plus Arbitrage Omni FOF;Direct Plan;Monthly IDCW Option;15.7359;03-Sep-2026
-147893;INF846K01U66;INF846K01U58;Axis Income Plus Arbitrage Omni FOF;Direct Plan;Quarterly IDCW Option;12.2876;03-Sep-2026
-147898;INF846K01V32;INF846K01V24;Axis Income Plus Arbitrage Omni FOF;Regular Plan;Annual IDCW Option;13.9411;03-Sep-2026
-147890;INF846K01V16;-;Axis Income Plus Arbitrage Omni FOF;Regular Plan;Growth Option;15.3841;03-Sep-2026
-147897;INF846K01V81;INF846K01V99;Axis Income Plus Arbitrage Omni FOF;Regular Plan;Half Yearly IDCW Option;12.2599;03-Sep-2026
-147888;INF846K01W07;INF846K01W15;Axis Income Plus Arbitrage Omni FOF;Regular Plan;IDCW Option	;15.3885;03-Sep-2026
-147896;INF846K01V57;INF846K01V40;Axis Income Plus Arbitrage Omni FOF;Regular Plan;Monthly IDCW Option;15.3833;03-Sep-2026
-147905;INF846K01V73;INF846K01V65;Axis Income Plus Arbitrage Omni FOF;Regular Plan;Quarterly IDCW Option;11.4323;03-Sep-2026
+147895;INF846K01U25;INF846K01U17;Axis Income Plus Arbitrage Omni FOF;Direct Plan;Annual IDCW Option;14.2362;04-Sep-2026
+147889;INF846K01U09;-;Axis Income Plus Arbitrage Omni FOF;Direct Plan;Growth Option;15.7184;04-Sep-2026
+147894;INF846K01U74;INF846K01U82;Axis Income Plus Arbitrage Omni FOF;Direct Plan;Half Yearly Dividend Option;11.7209;04-Sep-2026
+147891;INF846K01U90;INF846K01V08;Axis Income Plus Arbitrage Omni FOF;Direct Plan;IDCW Option;15.7316;04-Sep-2026
+147892;INF846K01U41;INF846K01U33;Axis Income Plus Arbitrage Omni FOF;Direct Plan;Monthly IDCW Option;15.7315;04-Sep-2026
+147893;INF846K01U66;INF846K01U58;Axis Income Plus Arbitrage Omni FOF;Direct Plan;Quarterly IDCW Option;12.2841;04-Sep-2026
+147898;INF846K01V32;INF846K01V24;Axis Income Plus Arbitrage Omni FOF;Regular Plan;Annual IDCW Option;13.9371;04-Sep-2026
+147890;INF846K01V16;-;Axis Income Plus Arbitrage Omni FOF;Regular Plan;Growth Option;15.3797;04-Sep-2026
+147897;INF846K01V81;INF846K01V99;Axis Income Plus Arbitrage Omni FOF;Regular Plan;Half Yearly IDCW Option;12.2563;04-Sep-2026
+147888;INF846K01W07;INF846K01W15;Axis Income Plus Arbitrage Omni FOF;Regular Plan;IDCW Option	;15.3841;04-Sep-2026
+147896;INF846K01V57;INF846K01V40;Axis Income Plus Arbitrage Omni FOF;Regular Plan;Monthly IDCW Option;15.3788;04-Sep-2026
+147905;INF846K01V73;INF846K01V65;Axis Income Plus Arbitrage Omni FOF;Regular Plan;Quarterly IDCW Option;11.4289;04-Sep-2026
 153924;INF846KA1283;-;Axis Income Plus Arbitrage Passive FOF;Direct Plan;Growth Option Option;10.5190;04-Sep-2026
 153925;INF846KA1309;INF846KA1325;Axis Income Plus Arbitrage Passive FOF;Direct Plan;IDCW Option;10.5190;04-Sep-2026
 153927;INF846KA1275;-;Axis Income Plus Arbitrage Passive FOF;Regular Plan;Growth Option;10.4937;04-Sep-2026
@@ -5754,10 +5754,10 @@ Axis Mutual Fund
 149846;INF846K012G7;INF846K013G5;Axis Multi Factor Passive FoF;Direct Plan;IDCW Option;15.6663;04-Sep-2026
 149844;INF846K014G3;-;Axis Multi Factor Passive FoF;Regular Plan;Growth Option;15.4419;04-Sep-2026
 149845;INF846K015G0;INF846K016G8;Axis Multi Factor Passive FoF;Regular Plan;IDCW Option;15.4428;04-Sep-2026
-153960;INF846KA1366;-;Axis Multi-Asset Omni FoF;Direct Plan;Growth Option;10.9587;03-Sep-2026
-153961;INF846KA1374;INF846KA1382;Axis Multi-Asset Omni FoF;Direct Plan;IDCW Option;10.9586;03-Sep-2026
-153963;INF846KA1333;-;Axis Multi-Asset Omni FoF;Regular Plan;Growth Option;10.8662;03-Sep-2026
-153962;INF846KA1341;INF846KA1358;Axis Multi-Asset Omni FoF;Regular Plan;IDCW Option;10.8662;03-Sep-2026
+153960;INF846KA1366;-;Axis Multi-Asset Omni FoF;Direct Plan;Growth Option;10.9706;04-Sep-2026
+153961;INF846KA1374;INF846KA1382;Axis Multi-Asset Omni FoF;Direct Plan;IDCW Option;10.9706;04-Sep-2026
+153963;INF846KA1333;-;Axis Multi-Asset Omni FoF;Regular Plan;Growth Option;10.8776;04-Sep-2026
+153962;INF846KA1341;INF846KA1358;Axis Multi-Asset Omni FoF;Regular Plan;IDCW Option;10.8776;04-Sep-2026
 150618;INF846K019J6;INF846K010K3;Axis Silver Fund of Fund;Regular Plan;IDCW Option;39.1625;04-Sep-2026
 150617;INF846K018J8;-;Axis Silver Fund of Fund;Regular Plan;Growth Option;39.1639;04-Sep-2026
 150616;INF846K016J2;INF846K017J0;Axis Silver Fund of Fund;Direct Plan;IDCW Option;39.9708;04-Sep-2026
@@ -11236,10 +11236,10 @@ Bandhan Mutual Fund
  
 Baroda BNP Paribas Mutual Fund
  
-150285;INF251K01QT5;-;Baroda BNP Paribas Aqua Fund of Fund;Direct Plan;Growth Option;16.3025;03-Sep-2026
-150287;INF251K01QU3;INF251K01QV1;Baroda BNP Paribas Aqua Fund of Fund;Direct Plan;IDCW Option;16.3025;03-Sep-2026
-150286;INF251K01QR9;INF251K01QS7;Baroda BNP Paribas Aqua Fund of Fund;Regular Plan;IDCW Option;15.4095;03-Sep-2026
-150284;INF251K01QQ1;-;Baroda BNP Paribas Aqua Fund of Fund;Regular Plan;Growth Option;15.4095;03-Sep-2026
+150285;INF251K01QT5;-;Baroda BNP Paribas Aqua Fund of Fund;Direct Plan;Growth Option;16.3362;04-Sep-2026
+150287;INF251K01QU3;INF251K01QV1;Baroda BNP Paribas Aqua Fund of Fund;Direct Plan;IDCW Option;16.3362;04-Sep-2026
+150286;INF251K01QR9;INF251K01QS7;Baroda BNP Paribas Aqua Fund of Fund;Regular Plan;IDCW Option;15.4410;04-Sep-2026
+150284;INF251K01QQ1;-;Baroda BNP Paribas Aqua Fund of Fund;Regular Plan;Growth Option;15.4410;04-Sep-2026
  
 DSP Mutual Fund
  

@@ -61,6 +61,11 @@ if (file_exists($filename)) {
 // Get unique fund names
    
 // SQL query to exclude the 'admin' table
+
+$sourceFile = '../cache/amfinav/NAVAll.txt';
+$outputFile = '../cache/amfinav/NAVAll-parsed.txt';
+file_put_contents($outputFile, '');
+
 $tablequery = "SHOW TABLES WHERE `Tables_in_$dbname` != 'users' AND `Tables_in_$dbname` != 'administrator26131'";
 $stmt1 = $conn->query($tablequery);
 
@@ -71,9 +76,16 @@ while ($rowtable = $stmt1->fetch_array()) {
 		$sql = "SELECT DISTINCT ISIN_Code FROM $tablenamex";
 		$result = $conn->query($sql);
 		while ($row = $result->fetch_assoc()) 
-		{
-	
+		{	
     	$isincode = $row['ISIN_Code'];
+	$lines = file($sourceFile, FILE_IGNORE_NEW_LINES);
+	$output = '';
+	foreach ($lines as $line) {
+    		if (stripos($line, $isincode) !== false) {
+        	$output .= $line . PHP_EOL;
+    	}
+	}
+	file_put_contents($outputFile, $output, FILE_APPEND);
 	
     	// Query for each unique fund
     	$sql2 = "SELECT * FROM $tablenamex WHERE ISIN_Code='$isincode'";
@@ -84,7 +96,8 @@ while ($rowtable = $stmt1->fetch_array()) {
     	    // bigin loop
     	 
     		$isin = $row2['ISIN_Code'];    // Replace with your ISIN
-			$lines = file("../cache/amfinav/NAVAll.txt", FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+			// $lines = file("../cache/amfinav/NAVAll.txt", FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+			$lines = file($outputFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 			foreach ($lines as $line) 
 				{
 	
@@ -98,8 +111,12 @@ while ($rowtable = $stmt1->fetch_array()) {
 				// Compare both ISIN columns
 				if (strcasecmp(trim($fields[1]), $isin) == 0 ||
 				strcasecmp(trim($fields[2]), $isin) == 0) {
-                                file_put_contents("../cache/nav/$isin.nav.txt", $line . PHP_EOL, FILE_APPEND);
-	
+				$filename = "../cache/nav/{$isin}.nav.txt";
+				$today = date("Y-m-d");
+  				$fileDate = date("Y-m-d", filemtime($filename));
+  				if ($fileDate != $today) {
+					file_put_contents($filename, $line . PHP_EOL, FILE_APPEND);
+				}
 				$schemeCode = $fields[0];
 				$schemeName = $fields[3];
 				$nav        = $fields[count($fields) - 2];
