@@ -108,6 +108,7 @@ if (!isset($_SESSION['username'])) {
 if (isset($_SESSION['msg'])) { echo "<script> alert('" . addslashes($_SESSION['msg']) . "'); </script>"; unset($_SESSION['msg']); }
 
 include 'db_connect.php';
+// include 'service/subroutines/fetch_last_day_diff.php';
 
 $username = $_SESSION['username'];
 $fullname = $_SESSION['fullname'];
@@ -168,8 +169,9 @@ $gainloss_percent_total_value = ($gainloss_total_value / $purchase_total_value) 
         <th>Units</th>
         <th>Purchase Value</th>
         <th>Current Value</th>
-		<th>Gain Loss</th>
-	    <th>Percentage</th>
+	<th>Gain Loss</th>
+	<th>Diff</th>
+	<th>Percentage</th>
         <th>Action</th>
     </tr>
 
@@ -209,6 +211,30 @@ while ($row = $result->fetch_assoc()) {
         $purchase_total_value = $purchase_total_value + $row2['Purchase_Value'];        
     }
     $percentage_value = ($gainloss_initial_value / $purchase_initial_value) * 100;
+        // parse NAV data for last day change
+        $filePath = "cache/nav/{$isincode}.nav.txt";
+        $currentnav1 = null; $currentnav2 = null; $diff = 0; $diffvalue = 0;
+        if (file_exists($filePath)) {
+                        $lines = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+                        if (!empty($lines)) {
+                        $lastLine = end($lines);
+                        $fields = str_getcsv($lastLine, ';');
+                        $currentnav1 = $fields[count($fields) - 2];
+                        if (count($lines) >= 2) {
+                                $secondLastLine = $lines[count($lines) - 2];
+                                $fields = str_getcsv($secondLastLine, ';');
+                                $currentnav2 = $fields[count($fields) - 2];
+                                if ($currentnav2) {
+                                        $diff = $currentnav1 - $currentnav2;
+					$diffvalue = $units_initial_value * $diff;
+                                }
+                        } else {
+                                $currentnav2 = 0;
+                                $diff = 0;
+                        }
+                        }
+        }
+        // parse NAV data for last day change end
     	echo "<tr>";
         echo "<td><strong>".$fundname."</strong></td>";
         echo "<td><b>".$isincode."</b></td>";
@@ -219,8 +245,10 @@ while ($row = $result->fetch_assoc()) {
         echo "<td><b>".round($current_initial_value, 2)."</b></td>";
         $class = ($gainloss_initial_value >= 0) ? "profit" : "loss";
 		echo "<td class='$class'>".$gainloss_initial_value."</td>";
+        $class = ($diffvalue >= 0) ? "profit" : "loss";
+		echo "<td class='$class'>".number_format($diffvalue, 2)."</td>";
         $class = ($percentage_value >= 0) ? "profit" : "loss";
-        echo "<td class='$class'>".number_format($percentage_value, 2)." %</td>";
+        	echo "<td class='$class'>".number_format($percentage_value, 2)." %</td>";
 		?>
     	<td>
         <button class="btn btn-primary viewBtn1" data-toggle="modal" data-target="#Modal1"
