@@ -1,1 +1,6 @@
 120616;INF109K01S39;-;ICICI Prudential Conservative Hybrid Fund;Direct Plan;Growth;87.7814;04-Sep-2026
+120616;INF109K01S39;-;ICICI Prudential Conservative Hybrid Fund;Direct Plan;Growth;87.6468;07-Sep-2026
+120616;INF109K01S39;-;ICICI Prudential Conservative Hybrid Fund;Direct Plan;Growth;87.5753;08-Sep-2026
+120616;INF109K01S39;-;ICICI Prudential Conservative Hybrid Fund;Direct Plan;Growth;87.3908;09-Sep-2026
+120616;INF109K01S39;-;ICICI Prudential Conservative Hybrid Fund;Direct Plan;Growth;87.3724;10-Sep-2026
+120616;INF109K01S39;-;ICICI Prudential Conservative Hybrid Fund;Direct Plan;Growth;87.2531;11-Sep-2026

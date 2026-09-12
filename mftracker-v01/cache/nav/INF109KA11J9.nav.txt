@@ -1,1 +1,6 @@
 133054;INF109KA11J9;-;ICICI Prudential Equity Savings Fund;Direct Plan;Cumulative;25.17;04-Sep-2026
+133054;INF109KA11J9;-;ICICI Prudential Equity Savings Fund;Direct Plan;Cumulative;25.16;07-Sep-2026
+133054;INF109KA11J9;-;ICICI Prudential Equity Savings Fund;Direct Plan;Cumulative;25.14;08-Sep-2026
+133054;INF109KA11J9;-;ICICI Prudential Equity Savings Fund;Direct Plan;Cumulative;25.06;09-Sep-2026
+133054;INF109KA11J9;-;ICICI Prudential Equity Savings Fund;Direct Plan;Cumulative;25.13;10-Sep-2026
+133054;INF109KA11J9;-;ICICI Prudential Equity Savings Fund;Direct Plan;Cumulative;25.08;11-Sep-2026

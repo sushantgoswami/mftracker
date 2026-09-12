@@ -7,6 +7,7 @@ if (!isset($_SESSION['username'])) {
 include 'db_connect.php';
 
 $id = (string) $_GET['id'];
+$_SESSION['fundisincode'] = $id;
 
 $stmt = $conn->prepare("SELECT * FROM `" . $_SESSION['tablename'] . "` WHERE ISIN_Code = ? ORDER BY Date");
 $stmt->bind_param("s", $id);   // i = integer, s = string
@@ -27,7 +28,7 @@ while ($row1 = $result1->fetch_assoc()) {
 <html>
 <head>
     <link rel="stylesheet" href="css/style5.css">
-    <title>Mutual Fund Records</title>
+    <script src="charts/js/chart.js"></script>
     <link rel="icon" type="image/x-icon" href="icons/golden-indian-rupee.ico">
 </head>
 <body>
@@ -84,3 +85,7 @@ $stmt1->close();
 $conn->close();
 ?>
 </table>
+<br>
+
+</body>
+</html>

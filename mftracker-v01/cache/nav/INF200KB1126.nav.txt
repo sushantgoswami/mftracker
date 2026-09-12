@@ -1,1 +1,6 @@
 152417;INF200KB1126;-;SBI Energy Opportunities Fund;Direct Plan;Growth;11.3360;04-Sep-2026
+152417;INF200KB1126;-;SBI Energy Opportunities Fund;Direct Plan;Growth;11.2845;07-Sep-2026
+152417;INF200KB1126;-;SBI Energy Opportunities Fund;Direct Plan;Growth;11.2120;08-Sep-2026
+152417;INF200KB1126;-;SBI Energy Opportunities Fund;Direct Plan;Growth;11.2683;09-Sep-2026
+152417;INF200KB1126;-;SBI Energy Opportunities Fund;Direct Plan;Growth;11.2699;10-Sep-2026
+152417;INF200KB1126;-;SBI Energy Opportunities Fund;Direct Plan;Growth;11.2183;11-Sep-2026

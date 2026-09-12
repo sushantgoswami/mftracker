@@ -1,1 +1,6 @@
 152742;INF277KA1CC0;-;Tata Nifty India Tourism Index Fund;Direct Plan;Growth Option;8.9534;04-Sep-2026
+152742;INF277KA1CC0;-;Tata Nifty India Tourism Index Fund;Direct Plan;Growth Option;8.9070;07-Sep-2026
+152742;INF277KA1CC0;-;Tata Nifty India Tourism Index Fund;Direct Plan;Growth Option;8.9232;08-Sep-2026
+152742;INF277KA1CC0;-;Tata Nifty India Tourism Index Fund;Direct Plan;Growth Option;8.9208;09-Sep-2026
+152742;INF277KA1CC0;-;Tata Nifty India Tourism Index Fund;Direct Plan;Growth Option;8.8486;10-Sep-2026
+152742;INF277KA1CC0;-;Tata Nifty India Tourism Index Fund;Direct Plan;Growth Option;8.8570;11-Sep-2026

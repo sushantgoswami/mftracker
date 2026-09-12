@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <head>
     <link href="bootstrap/bootstrap.min.css" rel="stylesheet">
-    <script src="charts/js/chart.js"></script>
     <script src="bootstrap/jquery-3.7.1.min.js"></script>
     <script src="bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="charts/js/chart.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="css/style5.css">
     <link rel="icon" type="image/x-icon" href="icons/golden-indian-rupee.ico">
     <style>
@@ -251,13 +252,21 @@ while ($row = $result->fetch_assoc()) {
         	echo "<td class='$class'>".number_format($percentage_value, 2)." %</td>";
 		?>
     	<td>
-        <button class="btn btn-primary viewBtn1" data-toggle="modal" data-target="#Modal1"
+        <button title="Purchase Details" style="background-color: #008000" class="btn btn-primary viewBtn1" data-toggle="modal" data-target="#Modal1"
                 data-id="<?php echo $isincode; ?>">
-            Details
+            <i class="bi bi-eye"></i>
         </button>
-        <button style="background-color:orange" class="btn btn-primary viewBtn2" data-toggle="modal" data-target="#Modal2"
+        <button title="Add Units" style="background-color:orange" class="btn btn-primary viewBtn2" data-toggle="modal" data-target="#Modal2"
                 data-id="<?php echo $isincode; ?>">
-            Add
+            <i class="bi bi-bag-plus-fill"></i>
+        </button>
+        <button title="Show NAV Graph" style="background-color: #ac7339" class="btn btn-primary viewBtn3" data-toggle="modal" data-target="#Modal3"
+                data-id="<?php echo $isincode; ?>">
+            <i class="bi bi-bar-chart-fill"></i>
+        </button>
+        <button title="Delete Fund" style="background-color: #cc0000" class="btn btn-primary viewBtn4" data-toggle="modal" data-target="#Modal4"
+                data-id="<?php echo $isincode; ?>">
+            <i class="bi bi-trash"></i>
         </button>
     	</td>
         <?php
@@ -312,6 +321,38 @@ echo "<hr>";
     </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="Modal3">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-overlay modal-content">
+            <div class="modal-box modal-close-btn modal-header">
+                <button class="btn-close"
+                        data-bs-dismiss="modal">
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody3">
+                Loading...
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="Modal4">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-overlay modal-content">
+            <div class="modal-box modal-close-btn modal-header">
+                <button class="btn-close"
+                        data-bs-dismiss="modal">
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody4">
+                Loading...
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
 
 $(document).on("click",".viewBtn1",function(){
@@ -332,6 +373,49 @@ $(document).on("click",".viewBtn2",function(){
     $("#modalBody2").html("Loading...");
     $("#modalBody2").load("data-service/data_entry_modal.php?id="+id);
     $("#Modal2").modal("show");
+
+});
+
+</script>
+
+<script>
+
+$(document).on("click", ".viewBtn3", function () {
+    var id = $(this).data("id");
+    $("#Modal3").modal("show");
+    $("#modalBody3").html("Loading...");
+    $("#modalBody3").load(
+        "charts/fund_chart5.php?id=" +
+        encodeURIComponent(id),
+        function (response, status, xhr) {
+            if (status === "error") {
+                console.error(
+                    "Error loading chart:",
+                    xhr.status,
+                    xhr.statusText
+                );
+                $("#modalBody3").html(
+                    "<p style='color:red;'>Unable to load chart.</p>"
+                );
+                return;
+            }
+            console.log(
+                "fund_chart5.php loaded successfully"
+            );
+        }
+    );
+});
+
+</script>
+
+<script>
+
+$(document).on("click",".viewBtn4",function(){
+
+    var id=$(this).data("id");
+    $("#modalBody4").html("Loading...");
+    $("#modalBody4").load("data-service/data_delete_modal.php?id="+id);
+    $("#Modal4").modal("show");
 
 });
 

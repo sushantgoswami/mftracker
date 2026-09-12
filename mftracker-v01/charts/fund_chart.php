@@ -5,7 +5,7 @@ if (!isset($_SESSION['username'])) {header("Location: ../../login.php"); exit;}
 
 $data = [];
 $username_user = $_SESSION['username'];
-$filename = "../cache/totalvalue/$username_user.csv";
+$filename = "cache/totalvalue/$username_user.csv";
 
 $data = [];
 
@@ -25,6 +25,7 @@ if (($handle = fopen($filename, "r")) !== false) {
 
     fclose($handle);
 }
+print_r($data);
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +33,7 @@ if (($handle = fopen($filename, "r")) !== false) {
 <head>
     <title>CSV Chart</title>
 
-    <script src="js/chart.js"></script>
+    <script src="charts/js/chart.js"></script>
 </head>
 
 <body>

@@ -1,1 +1,6 @@
 145724;INF277K017Q3;-;Tata Arbitrage Fund;Direct Plan;Growth Option;16.2884;04-Sep-2026
+145724;INF277K017Q3;-;Tata Arbitrage Fund;Direct Plan;Growth Option;16.3238;07-Sep-2026
+145724;INF277K017Q3;-;Tata Arbitrage Fund;Direct Plan;Growth Option;16.3211;08-Sep-2026
+145724;INF277K017Q3;-;Tata Arbitrage Fund;Direct Plan;Growth Option;16.3174;09-Sep-2026
+145724;INF277K017Q3;-;Tata Arbitrage Fund;Direct Plan;Growth Option;16.3522;10-Sep-2026
+145724;INF277K017Q3;-;Tata Arbitrage Fund;Direct Plan;Growth Option;16.3199;11-Sep-2026

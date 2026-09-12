@@ -1,1 +1,6 @@
 152214;INF174KA1PZ7;-;Kotak Healthcare Fund;Direct Plan;Growth Option;17.676;04-Sep-2026
+152214;INF174KA1PZ7;-;Kotak Healthcare Fund;Direct Plan;Growth Option;17.745;07-Sep-2026
+152214;INF174KA1PZ7;-;Kotak Healthcare Fund;Direct Plan;Growth Option;17.845;08-Sep-2026
+152214;INF174KA1PZ7;-;Kotak Healthcare Fund;Direct Plan;Growth Option;17.973;09-Sep-2026
+152214;INF174KA1PZ7;-;Kotak Healthcare Fund;Direct Plan;Growth Option;18.109;10-Sep-2026
+152214;INF174KA1PZ7;-;Kotak Healthcare Fund;Direct Plan;Growth Option;17.98;11-Sep-2026

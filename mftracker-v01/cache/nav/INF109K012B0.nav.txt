@@ -1,1 +1,6 @@
 120377;INF109K012B0;-;ICICI Prudential Balanced Advantage Fund;Direct Plan;Growth;88.61;04-Sep-2026
+120377;INF109K012B0;-;ICICI Prudential Balanced Advantage Fund;Direct Plan;Growth;88.34;07-Sep-2026
+120377;INF109K012B0;-;ICICI Prudential Balanced Advantage Fund;Direct Plan;Growth;88.17;08-Sep-2026
+120377;INF109K012B0;-;ICICI Prudential Balanced Advantage Fund;Direct Plan;Growth;87.80;09-Sep-2026
+120377;INF109K012B0;-;ICICI Prudential Balanced Advantage Fund;Direct Plan;Growth;87.77;10-Sep-2026
+120377;INF109K012B0;-;ICICI Prudential Balanced Advantage Fund;Direct Plan;Growth;87.52;11-Sep-2026

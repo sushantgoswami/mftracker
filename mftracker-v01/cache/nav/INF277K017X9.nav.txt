@@ -1,1 +1,6 @@
 147757;INF277K017X9;-;Tata Focused Fund;Direct Plan;Growth Option;25.4444;04-Sep-2026
+147757;INF277K017X9;-;Tata Focused Fund;Direct Plan;Growth Option;25.2213;07-Sep-2026
+147757;INF277K017X9;-;Tata Focused Fund;Direct Plan;Growth Option;25.0436;08-Sep-2026
+147757;INF277K017X9;-;Tata Focused Fund;Direct Plan;Growth Option;24.9419;09-Sep-2026
+147757;INF277K017X9;-;Tata Focused Fund;Direct Plan;Growth Option;24.9585;10-Sep-2026
+147757;INF277K017X9;-;Tata Focused Fund;Direct Plan;Growth Option;24.8382;11-Sep-2026

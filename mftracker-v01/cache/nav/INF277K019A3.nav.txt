@@ -1,1 +1,6 @@
 135810;INF277K019A3;-;Tata India Pharma & Healthcare Fund;Direct Plan;Growth Option;39.5136;04-Sep-2026
+135810;INF277K019A3;-;Tata India Pharma & Healthcare Fund;Direct Plan;Growth Option;39.5473;07-Sep-2026
+135810;INF277K019A3;-;Tata India Pharma & Healthcare Fund;Direct Plan;Growth Option;39.5299;08-Sep-2026
+135810;INF277K019A3;-;Tata India Pharma & Healthcare Fund;Direct Plan;Growth Option;39.5623;09-Sep-2026
+135810;INF277K019A3;-;Tata India Pharma & Healthcare Fund;Direct Plan;Growth Option;39.4588;10-Sep-2026
+135810;INF277K019A3;-;Tata India Pharma & Healthcare Fund;Direct Plan;Growth Option;39.2439;11-Sep-2026

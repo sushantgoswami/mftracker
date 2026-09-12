@@ -1,1 +1,6 @@
 144333;INF174KA1186;-;Kotak Balanced Advantage Fund;Regular Plan;Growth Option;21.166;04-Sep-2026
+144333;INF174KA1186;-;Kotak Balanced Advantage Fund;Regular Plan;Growth Option;21.122;07-Sep-2026
+144333;INF174KA1186;-;Kotak Balanced Advantage Fund;Regular Plan;Growth Option;21.102;08-Sep-2026
+144333;INF174KA1186;-;Kotak Balanced Advantage Fund;Regular Plan;Growth Option;21.001;09-Sep-2026
+144333;INF174KA1186;-;Kotak Balanced Advantage Fund;Regular Plan;Growth Option;21.005;10-Sep-2026
+144333;INF174KA1186;-;Kotak Balanced Advantage Fund;Regular Plan;Growth Option;20.937;11-Sep-2026

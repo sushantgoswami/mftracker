@@ -1,1 +1,6 @@
 147473;INF174KA1EN7;-;Kotak Focused Fund;Direct Plan;Growth option;30.397;04-Sep-2026
+147473;INF174KA1EN7;-;Kotak Focused Fund;Direct Plan;Growth option;30.317;07-Sep-2026
+147473;INF174KA1EN7;-;Kotak Focused Fund;Direct Plan;Growth option;30.362;08-Sep-2026
+147473;INF174KA1EN7;-;Kotak Focused Fund;Direct Plan;Growth option;30.07;09-Sep-2026
+147473;INF174KA1EN7;-;Kotak Focused Fund;Direct Plan;Growth option;30.113;10-Sep-2026
+147473;INF174KA1EN7;-;Kotak Focused Fund;Direct Plan;Growth option;29.994;11-Sep-2026

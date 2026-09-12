@@ -265,7 +265,7 @@ exit();
     </div>
     
     <div class="input-group">
-     <input type="date" id="date" name="date" required>
+     <input type="date" id="date" name="date" max="<?php echo date("Y-m-d"); ?>" required>
      <label for="date">Date</label>
     </div>
     

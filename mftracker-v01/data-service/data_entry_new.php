@@ -215,7 +215,7 @@ exit();
     <a style="color:#003300;" href="../service/know_isincode.php" target="_blank">Find ISIN Code</a>
         
 	<div class="input-group">
-    <input type="date" name="date" id="date" required>
+    <input type="date" name="date" id="date" max="<?php echo date("Y-m-d"); ?>" required>
     <label for="date">Purchase Date</label>
     </div>
         

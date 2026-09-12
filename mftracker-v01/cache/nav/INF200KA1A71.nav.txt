@@ -1,1 +1,6 @@
 146643;INF200KA1A71;-;SBI Equity Minimum Variance Fund;Direct Plan;Growth;24.1399;04-Sep-2026
+146643;INF200KA1A71;-;SBI Equity Minimum Variance Fund;Direct Plan;Growth;24.0513;07-Sep-2026
+146643;INF200KA1A71;-;SBI Equity Minimum Variance Fund;Direct Plan;Growth;24.0354;08-Sep-2026
+146643;INF200KA1A71;-;SBI Equity Minimum Variance Fund;Direct Plan;Growth;23.9087;09-Sep-2026
+146643;INF200KA1A71;-;SBI Equity Minimum Variance Fund;Direct Plan;Growth;23.9077;10-Sep-2026
+146643;INF200KA1A71;-;SBI Equity Minimum Variance Fund;Direct Plan;Growth;23.7918;11-Sep-2026

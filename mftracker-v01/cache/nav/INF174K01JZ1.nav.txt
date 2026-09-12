@@ -1,1 +1,6 @@
 120154;INF174K01JZ1;-;Kotak Conservative Hybrid Fund;Direct Plan;Growth;69.9781;04-Sep-2026
+120154;INF174K01JZ1;-;Kotak Conservative Hybrid Fund;Direct Plan;Growth;69.9553;07-Sep-2026
+120154;INF174K01JZ1;-;Kotak Conservative Hybrid Fund;Direct Plan;Growth;69.9149;08-Sep-2026
+120154;INF174K01JZ1;-;Kotak Conservative Hybrid Fund;Direct Plan;Growth;69.8335;09-Sep-2026
+120154;INF174K01JZ1;-;Kotak Conservative Hybrid Fund;Direct Plan;Growth;69.885;10-Sep-2026
+120154;INF174K01JZ1;-;Kotak Conservative Hybrid Fund;Direct Plan;Growth;69.7831;11-Sep-2026

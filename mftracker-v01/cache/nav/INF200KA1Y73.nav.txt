@@ -1,1 +1,6 @@
 149134;INF200KA1Y73;-;SBI Balanced Advantage Fund;Direct Plan;Growth;16.5933;04-Sep-2026
+149134;INF200KA1Y73;-;SBI Balanced Advantage Fund;Direct Plan;Growth;16.5499;07-Sep-2026
+149134;INF200KA1Y73;-;SBI Balanced Advantage Fund;Direct Plan;Growth;16.5106;08-Sep-2026
+149134;INF200KA1Y73;-;SBI Balanced Advantage Fund;Direct Plan;Growth;16.4485;09-Sep-2026
+149134;INF200KA1Y73;-;SBI Balanced Advantage Fund;Direct Plan;Growth;16.4510;10-Sep-2026
+149134;INF200KA1Y73;-;SBI Balanced Advantage Fund;Direct Plan;Growth;16.4207;11-Sep-2026

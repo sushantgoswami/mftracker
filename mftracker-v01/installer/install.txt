@@ -1,0 +1,14 @@
+To install the application.
+
+1. Make changes in mftracker/config/db_config.php
+
+   # vi mftracker/mftracker-v01/config/db_config.php
+
+2. Run the php file mftracker/mftracker-v01/installer/default_user_table.php to make default tables 
+
+   # php mftracker/mftracker-v01/installer/default_user_table.php
+
+3. Make files to apache/nginx writable
+
+   # chown -R apache:apache mftracker/mftracker-v01/cache
+   # chown -R nginx:nginx mftracker/mftracker-v01/cache

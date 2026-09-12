@@ -1,1 +1,6 @@
 149882;INF200KA18E2;-;SBI MultiCap Fund;Direct Plan;Growth;18.0990;04-Sep-2026
+149882;INF200KA18E2;-;SBI MultiCap Fund;Direct Plan;Growth;18.0103;07-Sep-2026
+149882;INF200KA18E2;-;SBI MultiCap Fund;Direct Plan;Growth;18.0149;08-Sep-2026
+149882;INF200KA18E2;-;SBI MultiCap Fund;Direct Plan;Growth;17.9794;09-Sep-2026
+149882;INF200KA18E2;-;SBI MultiCap Fund;Direct Plan;Growth;17.9598;10-Sep-2026
+149882;INF200KA18E2;-;SBI MultiCap Fund;Direct Plan;Growth;17.9054;11-Sep-2026

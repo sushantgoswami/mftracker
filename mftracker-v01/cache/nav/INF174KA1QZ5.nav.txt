@@ -1,1 +1,6 @@
 152462;INF174KA1QZ5;-;Kotak Technology Fund;Direct Plan;Growth;10.911;04-Sep-2026
+152462;INF174KA1QZ5;-;Kotak Technology Fund;Direct Plan;Growth;10.786;07-Sep-2026
+152462;INF174KA1QZ5;-;Kotak Technology Fund;Direct Plan;Growth;10.758;08-Sep-2026
+152462;INF174KA1QZ5;-;Kotak Technology Fund;Direct Plan;Growth;10.554;09-Sep-2026
+152462;INF174KA1QZ5;-;Kotak Technology Fund;Direct Plan;Growth;10.546;10-Sep-2026
+152462;INF174KA1QZ5;-;Kotak Technology Fund;Direct Plan;Growth;10.546;10-Sep-2026

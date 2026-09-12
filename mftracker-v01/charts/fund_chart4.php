@@ -1,9 +1,16 @@
 <?php
+
 // session_start();
+
 if (!isset($_SESSION['username'])) {
     http_response_code(403);
     exit('Access denied');
 }
+
+$purchase_total_value = $_SESSION['purchase_total_value'];
+$current_total_value = $_SESSION['current_total_value'];
+$gainloss_total_value = $current_total_value - $purchase_total_value;
+$gainloss_total_value_percent = ($gainloss_total_value / $purchase_total_value) * 100;
 
 $username_user = $_SESSION['username'];
 $filename = "cache/totalvalue/$username_user.csv";
@@ -91,7 +98,7 @@ $gainClass =
                 Invested
             </div>
             <div class="kpi-value">
-                ₹ <?= number_format($latestPurchase, 2) ?>
+                ₹ <?= number_format($purchase_total_value, 2) ?>
             </div>
         </div>
         <div class="kpi-card green">
@@ -102,7 +109,7 @@ $gainClass =
                 Current Value
             </div>
             <div class="kpi-value">
-                ₹ <?= number_format($latestCurrent, 2) ?>
+                ₹ <?= number_format($current_total_value, 2) ?>
             </div>
         </div>
         <div class="kpi-card <?= $gainClass ?>">
@@ -114,12 +121,12 @@ $gainClass =
             </div>
             <div class="kpi-value-wrapper">
              <div class="kpi-value">
-                 <?= $latestGainLoss >= 0 ? '+' : '-' ?>
-                 ₹ <?= number_format(abs($latestGainLoss), 2) ?>
+                 <?= $gainloss_total_value >= 0 ? '+' : '-' ?>
+                 ₹ <?= number_format(abs($gainloss_total_value), 2) ?>
              </div> 
              <div class="kpi-percent">
-                 <?= $latestGainLoss >= 0 ? '+' : '' ?>
-                 (<?= number_format($latestPercent, 2) ?>%)
+                 <?= $gainloss_total_value_percent >= 0 ? '+' : '' ?>
+                 (<?= number_format($gainloss_total_value_percent, 2) ?>%)
              </div>
             </div>
         </div>

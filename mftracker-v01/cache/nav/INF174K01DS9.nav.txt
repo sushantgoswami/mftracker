@@ -1,1 +1,6 @@
 104908;INF174K01DS9;-;Kotak Mid Cap Fund;Regular Plan;Growth;146.747;04-Sep-2026
+104908;INF174K01DS9;-;Kotak Mid Cap Fund;Regular Plan;Growth;146.266;07-Sep-2026
+104908;INF174K01DS9;-;Kotak Mid Cap Fund;Regular Plan;Growth;146.517;08-Sep-2026
+104908;INF174K01DS9;-;Kotak Mid Cap Fund;Regular Plan;Growth;145.94;09-Sep-2026
+104908;INF174K01DS9;-;Kotak Mid Cap Fund;Regular Plan;Growth;145.636;10-Sep-2026
+104908;INF174K01DS9;-;Kotak Mid Cap Fund;Regular Plan;Growth;144.988;11-Sep-2026

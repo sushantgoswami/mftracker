@@ -1,1 +1,6 @@
 131373;INF174K01D28;-;Kotak Equity Savings Fund;Direct Plan;Growth;30.634;04-Sep-2026
+131373;INF174K01D28;-;Kotak Equity Savings Fund;Direct Plan;Growth;30.6092;07-Sep-2026
+131373;INF174K01D28;-;Kotak Equity Savings Fund;Direct Plan;Growth;30.6125;08-Sep-2026
+131373;INF174K01D28;-;Kotak Equity Savings Fund;Direct Plan;Growth;30.5462;09-Sep-2026
+131373;INF174K01D28;-;Kotak Equity Savings Fund;Direct Plan;Growth;30.6096;10-Sep-2026
+131373;INF174K01D28;-;Kotak Equity Savings Fund;Direct Plan;Growth;30.5295;11-Sep-2026

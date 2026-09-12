@@ -1,1 +1,6 @@
 133796;INF178L01095;-;Kotak Infrastructure and Economic Reform Fund;Regular Plan;Growth Option;71.034;04-Sep-2026
+133796;INF178L01095;-;Kotak Infrastructure and Economic Reform Fund;Regular Plan;Growth Option;71.181;07-Sep-2026
+133796;INF178L01095;-;Kotak Infrastructure and Economic Reform Fund;Regular Plan;Growth Option;71.385;08-Sep-2026
+133796;INF178L01095;-;Kotak Infrastructure and Economic Reform Fund;Regular Plan;Growth Option;71.032;09-Sep-2026
+133796;INF178L01095;-;Kotak Infrastructure and Economic Reform Fund;Regular Plan;Growth Option;70.974;10-Sep-2026
+133796;INF178L01095;-;Kotak Infrastructure and Economic Reform Fund;Regular Plan;Growth Option;70.639;11-Sep-2026

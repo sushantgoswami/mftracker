@@ -1,1 +1,6 @@
 119202;INF277K01MK8;-;Tata Large & Mid Cap Fund;Direct Plan;Growth Option;573.0197;04-Sep-2026
+119202;INF277K01MK8;-;Tata Large & Mid Cap Fund;Direct Plan;Growth Option;572.3498;07-Sep-2026
+119202;INF277K01MK8;-;Tata Large & Mid Cap Fund;Direct Plan;Growth Option;570.5507;08-Sep-2026
+119202;INF277K01MK8;-;Tata Large & Mid Cap Fund;Direct Plan;Growth Option;567.3697;09-Sep-2026
+119202;INF277K01MK8;-;Tata Large & Mid Cap Fund;Direct Plan;Growth Option;567.6805;10-Sep-2026
+119202;INF277K01MK8;-;Tata Large & Mid Cap Fund;Direct Plan;Growth Option;564.7167;11-Sep-2026
