@@ -324,8 +324,9 @@ echo "<hr>";
 <!-- Modal -->
 <div class="modal fade" id="Modal3">
     <div class="modal-dialog modal-lg">
-        <div class="modal-overlay modal-content">
-            <div class="modal-box modal-close-btn modal-header">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Fund Details</h5>
                 <button class="btn-close"
                         data-bs-dismiss="modal">
                 </button>

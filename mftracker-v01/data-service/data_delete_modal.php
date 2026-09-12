@@ -1,15 +1,26 @@
 <?php
 
+session_start();
 
-include 'db_connect.php';
+include '../db_connect.php';
 
-// if (!isset($_SESSION['username'])) { header("Location: ../../index.php"); exit; }
+if (!isset($_SESSION['username'])) { header("Location: ../../index.php"); exit; }
 
 $username_user = $_SESSION['username'];
+$tablename_user = $_SESSION['tablename'];
 $isincode_user = (string) $_GET['id'];
 
 $Captcha = random_int(10000, 99999);
 $_SESSION["Captcha"] = $Captcha;
+
+$stmt1 = $conn->prepare("SELECT Fund_Name FROM `" . $_SESSION['tablename'] . "` WHERE ISIN_Code = ? LIMIT 1");
+$stmt1->bind_param("s", $isincode_user);   // i = integer, s = string
+$stmt1->execute();
+$result1 = $stmt1->get_result();
+while ($row1 = $result1->fetch_assoc()) {
+    $fundname_user = $row1['Fund_Name'];
+}
+$stmt1->close();
 
 ?>
 
@@ -17,16 +28,14 @@ $_SESSION["Captcha"] = $Captcha;
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Enter the Purchase data</title>
+    <title>Delete Fund data</title>
     <link rel="icon" type="image/x-icon" href="../icons/golden-indian-rupee.ico">
     <link rel="stylesheet" href="css/data_delete_modal.css">
-    <!-- <h2>MF Information Form, Enter the Purchase data</h2> -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
 <div class="form-container">
-<form class="fancy-form" name=inputform action="delete_table_check.php" method="POST">
+<form class="fancy-form" name=inputform action="data-service/data_delete_modal_check.php" method="POST">
     <h2>Confirm Delete Fund</h2>
 
     <div class="input-group">
@@ -35,14 +44,24 @@ $_SESSION["Captcha"] = $Captcha;
     </div>
 
     <div class="input-group">
+    <input type="text" id="fundname_user" name="fundname_user" value="<?php echo $fundname_user; ?>" readonly>
+    <label for="fundname_user">fundname</label>
+    </div>
+
+    <div class="input-group">
     <input type="text" id="tablename_user" name="tablename_user" value="<?php echo $tablename_user; ?>" readonly>
     <label for="tablename_user">tablename</label>
     </div>
 
     <!-- Native Accent Checkbox -->
+    <div class="input-group">
+    <input type="text" id="isincode_user" name="isincode_user" value="<?php echo $isincode_user; ?>" readonly>
+    <label for="isincode_user">isincode</label>
+    </div>
+
     <div class="checkbox-group">
-    <input type="checkbox" id="tabledelete" name="tabledelete" value="yes">
-    <label for="tabledelete">Confirm delete table</label>
+    <input type="checkbox" id="funddelete" name="funddelete" value="yes">
+    <label for="funddelete">Confirm delete fund</label>
     </div>
 
     <div class="form-row">
@@ -55,7 +74,7 @@ $_SESSION["Captcha"] = $Captcha;
     <label for="Verify">Verify</label>
     </div></div>
 
-    <button type="submit" class="submit-btn" name="submit">Delete Table</button>
+    <button type="submit" class="submit-btn" name="submit">Delete Fund</button>
 
 </form>
 </div>

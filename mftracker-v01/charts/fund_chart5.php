@@ -3,7 +3,6 @@
 $id = (string) $_GET['id'];
 $username_user = $_SESSION['username'];
 $fundisincode = $id;
-// $fundisincode = "INF200K01TS8";
 
 $filename = "../cache/nav/$fundisincode.nav.txt";
 $data1 = [];
@@ -17,12 +16,11 @@ if (($handle = fopen($filename, "r")) !== false) {
     fclose($handle);
 }
 
-
 if (count($data1) > 30) {
     $data1 = array_slice($data1, -30);
 }
 
-echo "--------------------------------------------------------------------------------------------------------------------";
+// echo "-                                                                                                                       -";
 ?>
 
 <html>
@@ -40,7 +38,7 @@ echo "--------------------------------------------------------------------------
         <div class="panel-header">
             <div>
                 <div class="panel-title">
-                    <?php echo $id ?>
+                    <?php echo $id; ?>
                 </div>
                 <div class="panel-subtitle">
                     NAV Data Graph
